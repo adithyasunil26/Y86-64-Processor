@@ -9,7 +9,7 @@ module decode(
 
 );
 
-  input clk;
+  input reg clk;
 
   input reg [3:0] icode;
   input reg [3:0] ifun;
