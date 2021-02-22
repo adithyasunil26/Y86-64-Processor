@@ -26,7 +26,8 @@ module y86();
 	wire [63:0] decode_valC; 
 	wire [63:0] decode_valP; 
 
-
+	reg [7:0] mem [0:1024];
+	
 //instantiating each module
   fetch f();
   decode d();
