@@ -1,11 +1,17 @@
 `timescale 1ns / 1ps
 
 module decode(
-  PC,icode,ifun,rA,rB,
+  PC,icode,rA,rB,
   valA,valB
 );
 
-  
+  input reg [63:0] PC;
+  input reg [3:0] icode;
+  input reg [3:0] rA;
+  input reg [3:0] rB; 
+
+  output reg [63:0] valA;
+  output reg [63:0] valB; 
 
   if(icode==4'b0010) //cmovxx
   begin
