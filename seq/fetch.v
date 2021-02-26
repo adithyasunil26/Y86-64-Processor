@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module fetch(
-  icode,ifun,valC,valP,
-  reg_memory,main_memory,instr
+  PC,
+  icode,ifun,valC,rA,rB
 )
 
   output reg 
