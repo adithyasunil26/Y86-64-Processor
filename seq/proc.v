@@ -11,7 +11,10 @@ module proc()
 	wire [31:0] fetch_valC; 
 	wire [31:0] fetch_valP; 
 
-  fetch()
-
-
+  fetch();
+  decode();
+  execute();
+  memory();
+  write_back();
+  
 endmodule
