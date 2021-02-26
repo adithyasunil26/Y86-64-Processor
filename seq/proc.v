@@ -7,17 +7,26 @@ module proc();
   wire [63:0] pc;
   pipeline=64'bz;
 
-  wire [3:0] fetch_icode; 
-	wire [3:0] fetch_ifun; 
-	wire [3:0] fetch_rA; 
-	wire [3:0] fetch_rB;
-	wire [63:0] fetch_valC;
+  //fetch stage
+  wire [3:0] icode; 
+	wire [3:0] ifun; 
+	wire [3:0] rA; 
+	wire [3:0] rB;
+	wire [63:0] valC;
 
-	wire [63:0] fetch_valP; 
+  //decode stage
+  wire [63:0] valA;
+  wire [63:0] valB;
 
-  fetch(PC,fetch_icode,fetch_ifun,fetch_rA,fetch_rB,fetch_valC);
-  decode();
-  execute();
+  //execute stage
+  wire [63:0] valE;
+  wire CC;
+
+	wire [63:0] valP; 
+
+  fetch(PC,icode,ifun,rA,rB,valC);
+  decode(icode,rA,rB,valA,valB);
+  execute(icode,ifun,valA,valB,valC,valE,CC);
   memory();
   write_back();
 
