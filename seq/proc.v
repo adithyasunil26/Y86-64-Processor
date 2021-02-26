@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module proc()
   
   reg clk;
@@ -16,5 +18,5 @@ module proc()
   execute();
   memory();
   write_back();
-  
+
 endmodule
