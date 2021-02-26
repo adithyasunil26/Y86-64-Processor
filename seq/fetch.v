@@ -84,16 +84,16 @@ module fetch(
   instr_mem[59]=8'b00000000; //D
 
 //OPq
-  instr_mem[40]=8'b01100000; //5 fn
-  instr_mem[41]=8'b00000000; //rA rB
-  instr_mem[42]=8'b00000000; 
-  instr_mem[43]=8'b00000000;
-  instr_mem[44]=8'b00000000; 
-  instr_mem[45]=8'b00000000; 
-  instr_mem[46]=8'b00000000; 
-  instr_mem[47]=8'b00000000; 
-  instr_mem[48]=8'b00000000; 
-  instr_mem[49]=8'b00000000; 
+  instr_mem[60]=8'b01100000; //5 fn
+  instr_mem[61]=8'b00000000; //rA rB
+  instr_mem[62]=8'b00000000; 
+  instr_mem[63]=8'b00000000;
+  instr_mem[64]=8'b00000000; 
+  instr_mem[65]=8'b00000000; 
+  instr_mem[66]=8'b00000000; 
+  instr_mem[67]=8'b00000000; 
+  instr_mem[68]=8'b00000000; 
+  instr_mem[69]=8'b00000000; 
 
 //jxx
   instr_mem[40]=8'b01110000; //7 fn
