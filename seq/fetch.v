@@ -96,15 +96,15 @@ module fetch(
   instr_mem[69]=8'b00000000; 
 
 //jxx
-  instr_mem[40]=8'b01110000; //7 fn
-  instr_mem[41]=8'b00000000; //Dest
-  instr_mem[42]=8'b00000000; //Dest
-  instr_mem[43]=8'b00000000; //Dest
-  instr_mem[44]=8'b00000000; //Dest
-  instr_mem[45]=8'b00000000; //Dest
-  instr_mem[46]=8'b00000000; //Dest
-  instr_mem[47]=8'b00000000; //Dest
-  instr_mem[48]=8'b00000000; //Dest
-  instr_mem[49]=8'b00000000; //Dest
+  instr_mem[70]=8'b01110000; //7 fn
+  instr_mem[71]=8'b00000000; //Dest
+  instr_mem[72]=8'b00000000; //Dest
+  instr_mem[73]=8'b00000000; //Dest
+  instr_mem[74]=8'b00000000; //Dest
+  instr_mem[75]=8'b00000000; //Dest
+  instr_mem[76]=8'b00000000; //Dest
+  instr_mem[77]=8'b00000000; //Dest
+  instr_mem[78]=8'b00000000; //Dest
+  instr_mem[79]=8'b00000000; //Dest
 
 endmodule
