@@ -168,5 +168,9 @@ module fetch(
     instr_mem[PC+2],
     instr_mem[PC+1],
     instr_mem[PC],
-  }
+  };
+
+  assign instr=pipeline;
+
+  
 endmodule
