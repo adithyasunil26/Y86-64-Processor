@@ -119,4 +119,17 @@ module fetch(
   instr_mem[88]=8'b00000000; //Dest
   instr_mem[89]=8'b00000000; //Dest
 
+//ret
+  instr_mem[90]=8'b10010000; // 9 0
+  instr_mem[91]=8'b00000000;
+  instr_mem[92]=8'b00000000;
+  instr_mem[93]=8'b00000000;
+  instr_mem[94]=8'b00000000;
+  instr_mem[95]=8'b00000000;
+  instr_mem[96]=8'b00000000;
+  instr_mem[97]=8'b00000000;
+  instr_mem[98]=8'b00000000;
+  instr_mem[99]=8'b00000000;
+
+
 endmodule
