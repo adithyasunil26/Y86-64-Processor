@@ -5,7 +5,8 @@ module proc()
   reg clk;
 
   wire [63:0] pc;
-
+  pipeline=64'bz;
+  
   wire [3:0] fetch_icode; 
 	wire [3:0] fetch_ifun; 
 	wire [3:0] fetch_rA; 
