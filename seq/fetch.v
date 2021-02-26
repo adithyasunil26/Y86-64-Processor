@@ -3,12 +3,16 @@
 module fetch(
   PC,
   icode,ifun,rA,rB,valC
-)
+);
+
   input reg [63:0] PC;
-  output reg [3:0] icode,ifun,rA,rB; 
+  output reg [3:0] icode;
+  output reg [3:0] ifun;
+  output reg [3:0] rA;
+  output reg [3:0] rB; 
 
   reg [7:0] instr_mem[1:1024];
-  reg [63:0] reg_mem[14:0]
+  reg [63:0] reg_mem[14:0];
 
 //Instruction memory
 //halt
@@ -200,11 +204,11 @@ module fetch(
   end
   if(icode==4'b0111) //jxx
   begin
-    valC=instr[8:71]
+    valC=instr[8:71];
   end
   if(icode==4'b1000) //call
   begin
-    valC=instr[8:71]
+    valC=instr[8:71];
   end
   if(icode==4'b1010) //pushq
   begin
