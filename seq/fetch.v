@@ -72,14 +72,39 @@ module fetch(
   instr_mem[49]=8'b00000000; //D
 
 //mrmovq
-  instr_mem[40]=8'b01010000; //5 0
+  instr_mem[50]=8'b01010000; //5 0
+  instr_mem[51]=8'b00000000; //rA rB
+  instr_mem[52]=8'b00000000; //D
+  instr_mem[53]=8'b00000000; //D
+  instr_mem[54]=8'b00000000; //D
+  instr_mem[55]=8'b00000000; //D
+  instr_mem[56]=8'b00000000; //D
+  instr_mem[57]=8'b00000000; //D
+  instr_mem[58]=8'b00000000; //D
+  instr_mem[59]=8'b00000000; //D
+
+//OPq
+  instr_mem[40]=8'b01100000; //5 fn
   instr_mem[41]=8'b00000000; //rA rB
-  instr_mem[42]=8'b00000000; //D
-  instr_mem[43]=8'b00000000; //D
-  instr_mem[44]=8'b00000000; //D
-  instr_mem[45]=8'b00000000; //D
-  instr_mem[46]=8'b00000000; //D
-  instr_mem[47]=8'b00000000; //D
-  instr_mem[48]=8'b00000000; //D
-  instr_mem[49]=8'b00000000; //D
+  instr_mem[42]=8'b00000000; 
+  instr_mem[43]=8'b00000000;
+  instr_mem[44]=8'b00000000; 
+  instr_mem[45]=8'b00000000; 
+  instr_mem[46]=8'b00000000; 
+  instr_mem[47]=8'b00000000; 
+  instr_mem[48]=8'b00000000; 
+  instr_mem[49]=8'b00000000; 
+
+//jxx
+  instr_mem[40]=8'b01110000; //7 fn
+  instr_mem[41]=8'b00000000; //Dest
+  instr_mem[42]=8'b00000000; //Dest
+  instr_mem[43]=8'b00000000; //Dest
+  instr_mem[44]=8'b00000000; //Dest
+  instr_mem[45]=8'b00000000; //Dest
+  instr_mem[46]=8'b00000000; //Dest
+  instr_mem[47]=8'b00000000; //Dest
+  instr_mem[48]=8'b00000000; //Dest
+  instr_mem[49]=8'b00000000; //Dest
+
 endmodule
