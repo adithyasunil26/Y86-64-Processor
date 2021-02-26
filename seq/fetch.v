@@ -131,5 +131,27 @@ module fetch(
   instr_mem[98]=8'b00000000;
   instr_mem[99]=8'b00000000;
 
+//pushq
+  instr_mem[100]=8'b10100000; //A 0
+  instr_mem[101]=8'b00000000; //rA F
+  instr_mem[102]=8'b00000000;
+  instr_mem[103]=8'b00000000;
+  instr_mem[104]=8'b00000000;
+  instr_mem[105]=8'b00000000;
+  instr_mem[106]=8'b00000000;
+  instr_mem[107]=8'b00000000;
+  instr_mem[108]=8'b00000000;
+  instr_mem[109]=8'b00000000;
 
+//pushq
+  instr_mem[100]=8'b10100000; //A 0
+  instr_mem[101]=8'b00000000; //rA F
+  instr_mem[102]=8'b00000000;
+  instr_mem[103]=8'b00000000;
+  instr_mem[104]=8'b00000000;
+  instr_mem[105]=8'b00000000;
+  instr_mem[106]=8'b00000000;
+  instr_mem[107]=8'b00000000;
+  instr_mem[108]=8'b00000000;
+  instr_mem[109]=8'b00000000;
 endmodule
