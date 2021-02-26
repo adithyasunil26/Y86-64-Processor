@@ -5,14 +5,10 @@ module fetch(
   icode,ifun,valC,rA,rB
 )
 
-  output reg 
+  output reg; 
 
   reg [7:0] instr_mem[1:1024];
-  reg [63:0] reg_mem[14:0];
-
-  reg [63:0] pipeline,stored,PC;
-  pipeline=64'bz;
-  stored=64'bz;
+  reg [63:0] reg_mem[14:0]
 
 //Instruction memory
 //halt
