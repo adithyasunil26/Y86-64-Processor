@@ -1,5 +1,7 @@
 module proc()
   
+  reg clk;
+
   wire [63:0] pc;
 
   wire [3:0] fetch_icode; 
@@ -9,7 +11,7 @@ module proc()
 	wire [31:0] fetch_valC; 
 	wire [31:0] fetch_valP; 
 
-  
+  fetch()
 
 
 endmodule

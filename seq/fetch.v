@@ -1,5 +1,5 @@
 module fetch(
-
+  clk,
 )
 
 endmodule
