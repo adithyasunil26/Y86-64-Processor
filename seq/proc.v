@@ -27,7 +27,7 @@ module proc();
   fetch(PC,icode,ifun,rA,rB,valC);
   decode(icode,rA,rB,valA,valB);
   execute(icode,ifun,valA,valB,valC,valE,CC);
-  memory();
+  memory(icode,valA,valB,valE);
   write_back();
 
 endmodule
