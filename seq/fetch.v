@@ -2,10 +2,10 @@
 
 module fetch(
   PC,
-  icode,ifun,valC,rA,rB
+  icode,ifun,rA,rB,valC
 )
-
-  output reg; 
+  input reg [63:0] PC;
+  output reg [3:0] icode,ifun,rA,rB; 
 
   reg [7:0] instr_mem[1:1024];
   reg [63:0] reg_mem[14:0]
