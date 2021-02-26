@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module decode(
+module execute(
   icode,ifun,valA,valB,valC,
   valE,CC
 );
