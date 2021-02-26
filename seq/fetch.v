@@ -154,4 +154,6 @@ module fetch(
   instr_mem[117]=8'b00000000;
   instr_mem[118]=8'b00000000;
   instr_mem[119]=8'b00000000;
+
+
 endmodule
