@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module fetch(
+  icode,ifun,valC,valP,
   reg_memory,main_memory,instr
 )
 
@@ -158,25 +159,40 @@ module fetch(
   instr_mem[118]=8'b00000000;
   instr_mem[119]=8'b00000000;
   
-  always@(negedge clk)
-  begin 
-    stored = 1;
-    pipeline={
-      instr_mem[PC+9],
-      instr_mem[PC+8],
-      instr_mem[PC+7],
-      instr_mem[PC+6],
-      instr_mem[PC+5],
-      instr_mem[PC+4],
-      instr_mem[PC+3],
-      instr_mem[PC+2],
-      instr_mem[PC+1],
-      instr_mem[PC],
-    };
-    stored = 0;
-    PC[31:0] = {PC_update_2+newvar,{2{1'b0}}};
-  end
+  instr={
+    instr_mem[PC],
+    instr_mem[PC+1],
+    instr_mem[PC+2],
+    instr_mem[PC+3],
+    instr_mem[PC+4],
+    instr_mem[PC+5],
+    instr_mem[PC+6],
+    instr_mem[PC+7],
+    instr_mem[PC+8],
+    instr_mem[PC+9]
+  };
 
-  assign instr=pipeline;
+  icode= instr[0:3];
+  ifun= instr[4:7];
+
+  if(icode==4'b0110) //OPq
+  begin
+    rA=instr[8:11];
+    rB=instr[12:15];
+    valP=PC+2;
+  end
+  if(icode==4'b0110)
+  begin
+
+  end
+  // always@(posedge clk)
+  // begin 
+  //   stored = 1;
+  //   
+  //   stored = 0;
+  //   PC[31:0] = {PC_update_2+newvar,{2{1'b0}}};
+  // end
+
+  // assign instr=pipeline;
 
 endmodule
