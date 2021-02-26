@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module fetch(
   reg_memory,main_memory,instr
 )
