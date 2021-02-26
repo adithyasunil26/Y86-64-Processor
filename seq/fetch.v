@@ -144,7 +144,7 @@ module fetch(
   instr_mem[109]=8'b00000000;
 
 //popq
-  instr_mem[110]=8'b10100000; //A 0
+  instr_mem[110]=8'b10110000; //B 0
   instr_mem[111]=8'b00000000; //rA F
   instr_mem[112]=8'b00000000;
   instr_mem[113]=8'b00000000;
