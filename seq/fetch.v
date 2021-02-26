@@ -1,7 +1,9 @@
 module fetch(
   clk,
-  icode,ifun,rA,rB,valC
+  reg_memory,main_memory,instr
 )
+
+  output reg 
 
   reg [7:0] instr_mem[1:1024];
   reg [63:0] reg_mem[14:0];
@@ -155,5 +157,16 @@ module fetch(
   instr_mem[118]=8'b00000000;
   instr_mem[119]=8'b00000000;
 
-
+  pipeline={
+    instr_mem[PC+9],
+    instr_mem[PC+8],
+    instr_mem[PC+7],
+    instr_mem[PC+6],
+    instr_mem[PC+5],
+    instr_mem[PC+4],
+    instr_mem[PC+3],
+    instr_mem[PC+2],
+    instr_mem[PC+1],
+    instr_mem[PC],
+  }
 endmodule
