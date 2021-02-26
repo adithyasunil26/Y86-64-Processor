@@ -1,5 +1,5 @@
 module fetch(
-  clk,  pc, mem,
+  clk, pc, mem,
   icode, ifun, rA, rB, valC, valp,
 );
 
