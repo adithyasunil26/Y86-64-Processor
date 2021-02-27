@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module decode(
+module memory(
   icode,valA,valB,valE
 );
 
