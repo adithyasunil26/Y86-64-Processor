@@ -1,17 +1,14 @@
 `timescale 1ns / 1ps
 
 module write_back(
-  icode,valA,valB,valE
+  icode,rA,rB,valE
 );
 
   input reg [3:0] icode;
-  input reg [3:0] ifun;
-  input reg [63:0] valA;
-  input reg [63:0] valB;
-  input reg [63:0] valC;
+  input reg [63:0] rA;
+  input reg [63:0] rB;
+  input reg [63:0] valE;
 
-  output reg [63:0] valE; 
-  output reg CC;
 
   if(icode==4'b0010) //cmovxx
   begin
