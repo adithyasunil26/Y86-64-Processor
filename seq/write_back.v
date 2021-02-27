@@ -21,37 +21,37 @@ module write_back(
   begin
     reg_mem[rB]=valE;
   end
-  if(icode==4'b0100) //rmmovq
-  begin
-    valE=valB+valC;
-  end
+  // if(icode==4'b0100) //rmmovq
+  // begin
+  // end
   if(icode==4'b0101) //mrmovq
   begin
-    valE=valB+valC;
+    reg_mem[rA]=valM;
   end
   if(icode==4'b0110) //OPq
   begin
     reg_mem[rB]=valE;
   end
-  if(icode==4'b0111) //jxx
-  begin
-    //cnd=cond(cc,ifun)
-  end
+  // if(icode==4'b0111) //jxx
+  // begin
+  // end
   if(icode==4'b1000) //call
   begin
-    valE=-64'd8+valB;
+    reg_mem[4]=valE;
   end
   if(icode==4'b1001) //ret
   begin
-    valE=64'd8+valB;
+    reg_mem[4]=valE;
   end
+
   if(icode==4'b1010) //pushq
   begin
-    valE=-64'd8+valB;
+    reg_mem[4]=valE;
   end
   if(icode==4'b1011) //popq
   begin
-    valE=64'd8+valB;
+    reg_mem[4]=valE;
+    reg_mem[rA]=valM;
   end
 
 endmodule
