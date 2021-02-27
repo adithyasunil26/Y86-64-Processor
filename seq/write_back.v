@@ -1,22 +1,25 @@
 `timescale 1ns / 1ps
 
 module write_back(
-  icode,rA,rB,valE
+  icode,rA,rB,valA,valB,valE,valM
 );
 
   input reg [3:0] icode;
-  input reg [63:0] rA;
-  input reg [63:0] rB;
+  input reg [3:0] rA;
+  input reg [3:0] rB;
+  input reg [63:0] valA;
+  input reg [63:0] valB;
   input reg [63:0] valE;
+  input reg [63:0] valM;
 
 
   if(icode==4'b0010) //cmovxx
   begin
-    valE=64'd0+valA;
+    reg_mem[rB]=valE;
   end
   if(icode==4'b0011) //irmovq
   begin
-    valE=64'd0+valC;
+    reg_mem[rB]=valE;
   end
   if(icode==4'b0100) //rmmovq
   begin
@@ -28,22 +31,7 @@ module write_back(
   end
   if(icode==4'b0110) //OPq
   begin
-    if(ifun==4'b0000) //add
-    begin
-      //valE=valA+valB;
-    end
-    if(ifun==4'b0001) //sub
-    begin
-      //valE=valA-valB;
-    end
-    if(ifun==4'b0010) //and
-    begin
-      //valE=valA.valB;
-    end
-    if(ifun==4'b0011) //xor
-    begin
-      //valE=valA^valB;
-    end
+    reg_mem[rB]=valE;
   end
   if(icode==4'b0111) //jxx
   begin
