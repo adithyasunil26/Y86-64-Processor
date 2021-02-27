@@ -28,6 +28,6 @@ module proc();
   decode(icode,rA,rB,valA,valB);
   execute(icode,ifun,valA,valB,valC,valE,CC);
   memory(icode,valA,valB,valE,valP,valM);
-  write_back();
+  write_back(icode,rA,rB,valA,valB,valE,valM);
 
 endmodule
