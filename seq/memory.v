@@ -1,13 +1,14 @@
 `timescale 1ns / 1ps
 
 module memory(
-  icode,valA,valB,valE,valM
+  icode,valA,valB,valE,valP,valM
 );
 
   input reg [3:0] icode;
   input reg [63:0] valA;
   input reg [63:0] valB;
   input reg [63:0] valE;
+  input reg [63:0] valP;
   
   output reg [63:0] valM;
 
@@ -40,17 +41,16 @@ module memory(
   //   begin
   //   end
   // end
-  if(icode==4'b0111) //jxx
-  begin
-    //cnd=cond(cc,ifun)
-  end
+  // if(icode==4'b0111) //jxx
+  // begin
+  // end
   if(icode==4'b1000) //call
   begin
-    valE=-64'd8+valB;
+    data_mem[valE]=valP;
   end
   if(icode==4'b1001) //ret
   begin
-    valE=64'd8+valB;
+    valM=data_mem[valA];
   end
   if(icode==4'b1010) //pushq
   begin
@@ -58,7 +58,7 @@ module memory(
   end
   if(icode==4'b1011) //popq
   begin
-    valE=64'd8+valB;
+    valM=data_mem[valE];
   end
 
 endmodule
