@@ -5,7 +5,9 @@ module proc();
   reg clk;
 
   wire [63:0] pc;
-  pipeline=64'bz;
+  
+  reg [63:0] reg_mem[14:0];
+  reg [63:0] data_mem[0:255];
 
   //fetch stage
   wire [3:0] icode; 
@@ -26,14 +28,10 @@ module proc();
 
   always #5 clk = ~clk;
 
-  always@(posedge clk)
-  begin 
-    fetch(PC,icode,ifun,rA,rB,valC);
-    decode(icode,rA,rB,valA,valB);
-    execute(icode,ifun,valA,valB,valC,valE,CC);
-    memory(icode,valA,valB,valE,valP,valM);
-    write_back(icode,rA,rB,valA,valB,valE,valM);
-    pc_update(pc,icode,updated_pc)
-  end
-
+  fetch(PC,icode,ifun,rA,rB,valC);
+  decode(icode,rA,rB,valA,valB);
+  execute(icode,ifun,valA,valB,valC,valE,CC);
+  memory(icode,valA,valB,valE,valP,valM);
+  write_back(icode,rA,rB,valA,valB,valE,valM);
+  pc_update(pc,icode,updated_pc);
 endmodule
