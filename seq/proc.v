@@ -24,10 +24,16 @@ module proc();
 
 	wire [63:0] valP; 
 
-  fetch(PC,icode,ifun,rA,rB,valC);
-  decode(icode,rA,rB,valA,valB);
-  execute(icode,ifun,valA,valB,valC,valE,CC);
-  memory(icode,valA,valB,valE,valP,valM);
-  write_back(icode,rA,rB,valA,valB,valE,valM);
+  always #5 clk = ~clk;
+
+  always@(posedge clk)
+  begin 
+    fetch(PC,icode,ifun,rA,rB,valC);
+    decode(icode,rA,rB,valA,valB);
+    execute(icode,ifun,valA,valB,valC,valE,CC);
+    memory(icode,valA,valB,valE,valP,valM);
+    write_back(icode,rA,rB,valA,valB,valE,valM);
+    pc_update(pc,icode,updated_pc)
+  end
 
 endmodule
