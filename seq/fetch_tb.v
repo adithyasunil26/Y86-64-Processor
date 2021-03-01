@@ -10,7 +10,7 @@ module fetchtb;
   wire [63:0] valC;
   wire [63:0] valP;
 
-  fetch uut(
+  fetch fetch(
     .clk(clk),
     .PC(PC),
     .icode(icode),
