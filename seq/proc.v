@@ -4,8 +4,13 @@ module proc();
   
   reg clk;
 
-  wire [63:0] pc;
+  reg [63:0] PC;
   
+  initial
+  begin
+    PC=64'd0;
+  end
+
   reg [63:0] reg_mem[14:0];
   reg [63:0] data_mem[0:255];
 
@@ -25,13 +30,14 @@ module proc();
   wire CC;
 
 	wire [63:0] valP; 
+  wire [63:0] valM; 
 
   always #5 clk = ~clk;
 
-  fetch(PC,icode,ifun,rA,rB,valC);
-  decode(icode,rA,rB,valA,valB);
-  execute(icode,ifun,valA,valB,valC,valE,CC);
-  memory(icode,valA,valB,valE,valP,valM);
-  write_back(icode,rA,rB,valA,valB,valE,valM);
-  pc_update(pc,icode,updated_pc);
+  fetch fetch(PC,icode,ifun,rA,rB,valC);
+  decode decode(icode,rA,rB,valA,valB);
+  execute execute(icode,ifun,valA,valB,valC,valE,CC);
+  memory memory(icode,valA,valB,valE,valP,valM);
+  write_back wb(icode,rA,rB,valA,valB,valE,valM);
+  pc_update pcup(PC,icode,updated_pc);
 endmodule

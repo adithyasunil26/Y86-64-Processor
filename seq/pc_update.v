@@ -4,12 +4,10 @@ module pc_update(
   pc,icode,updated_pc
 );
 
-  input reg [3:0] icode;
-  input reg [63:0] pc;
-  output reg [63:0] updated_pc;
-
-  updated_pc=pc+63'd10;
-
+  input [3:0] icode;
+  input [63:0] pc;
+  output [63:0] updated_pc;
+  assign updated_pc=pc+64'd10;
   // if(icode==4'b0010) //cmovxx
   // begin
   //   reg_mem[rB]=valE;

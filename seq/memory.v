@@ -4,11 +4,11 @@ module memory(
   icode,valA,valB,valE,valP,valM
 );
 
-  input reg [3:0] icode;
-  input reg [63:0] valA;
-  input reg [63:0] valB;
-  input reg [63:0] valE;
-  input reg [63:0] valP;
+  input [3:0] icode;
+  input [63:0] valA;
+  input [63:0] valB;
+  input [63:0] valE;
+  input [63:0] valP;
   
   output reg [63:0] valM;
 

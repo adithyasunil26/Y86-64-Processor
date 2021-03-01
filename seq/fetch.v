@@ -5,13 +5,16 @@ module fetch(
   icode,ifun,rA,rB,valC
 );
 
-  input reg [63:0] PC;
+  input [63:0] PC;
   output reg [3:0] icode;
   output reg [3:0] ifun;
   output reg [3:0] rA;
   output reg [3:0] rB; 
+  output reg [63:0] valC;
 
   reg [7:0] instr_mem[0:1023];
+
+  reg [0:79] instr;
 
   initial begin
   //Instruction memory
@@ -158,18 +161,19 @@ module fetch(
     instr_mem[117]=8'b00000000;
     instr_mem[118]=8'b00000000;
     instr_mem[119]=8'b00000000;
+    
     instr={
-    instr_mem[PC],
-    instr_mem[PC+1],
-    instr_mem[PC+2],
-    instr_mem[PC+3],
-    instr_mem[PC+4],
-    instr_mem[PC+5],
-    instr_mem[PC+6],
-    instr_mem[PC+7],
-    instr_mem[PC+8],
-    instr_mem[PC+9]
-  };
+      instr_mem[PC],
+      instr_mem[PC+1],
+      instr_mem[PC+2],
+      instr_mem[PC+3],
+      instr_mem[PC+4],
+      instr_mem[PC+5],
+      instr_mem[PC+6],
+      instr_mem[PC+7],
+      instr_mem[PC+8],
+      instr_mem[PC+9]
+    };
   end  
 
   always@(instr) 

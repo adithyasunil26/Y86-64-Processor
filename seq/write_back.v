@@ -4,13 +4,13 @@ module write_back(
   icode,rA,rB,valA,valB,valE,valM
 );
 
-  input reg [3:0] icode;
-  input reg [3:0] rA;
-  input reg [3:0] rB;
-  input reg [63:0] valA;
-  input reg [63:0] valB;
-  input reg [63:0] valE;
-  input reg [63:0] valM;
+  input [3:0] icode;
+  input [3:0] rA;
+  input [3:0] rB;
+  input [63:0] valA;
+  input [63:0] valB;
+  input [63:0] valE;
+  input [63:0] valM;
 
   always@(icode)
   begin

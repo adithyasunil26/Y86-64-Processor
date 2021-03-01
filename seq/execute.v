@@ -5,11 +5,11 @@ module execute(
   valE,CC
 );
 
-  input reg [3:0] icode;
-  input reg [3:0] ifun;
-  input reg [63:0] valA;
-  input reg [63:0] valB;
-  input reg [63:0] valC;
+  input [3:0] icode;
+  input [3:0] ifun;
+  input [63:0] valA;
+  input [63:0] valB;
+  input [63:0] valC;
 
   output reg [63:0] valE; 
   output reg CC;

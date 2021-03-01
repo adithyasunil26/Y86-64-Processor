@@ -5,9 +5,9 @@ module decode(
   valA,valB
 );
 
-  input reg [3:0] icode;
-  input reg [3:0] rA;
-  input reg [3:0] rB; 
+  input [3:0] icode;
+  input [3:0] rA;
+  input [3:0] rB; 
 
   output reg [63:0] valA;
   output reg [63:0] valB; 
@@ -54,8 +54,8 @@ module decode(
     end
     if(icode==4'b1011) //popq
     begin
-      rA=reg_mem[4]; //rsp
-      rB=reg_mem[4]; //rsp
+      valA=reg_mem[4]; //rsp
+      valB=reg_mem[4]; //rsp
     end
   end
 
