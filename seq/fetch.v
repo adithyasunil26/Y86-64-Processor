@@ -4,7 +4,7 @@ module fetch(
   clk,PC,
   icode,ifun,rA,rB,valC,valP
 );
-
+  input clk;
   input [63:0] PC;
   output reg [3:0] icode;
   output reg [3:0] ifun;
@@ -45,7 +45,7 @@ module fetch(
 
   //cmovxx
     instr_mem[20]=8'b00100000; //2 fn
-    instr_mem[21]=8'b00000000; //rA rB
+    instr_mem[21]=8'b01000010; //rA rB
     instr_mem[22]=8'b00000000;
     instr_mem[23]=8'b00000000;
     instr_mem[24]=8'b00000000;
@@ -162,7 +162,10 @@ module fetch(
     instr_mem[117]=8'b00000000;
     instr_mem[118]=8'b00000000;
     instr_mem[119]=8'b00000000;
-    
+  end  
+
+  always@(posedge clk) 
+  begin 
     instr={
       instr_mem[PC],
       instr_mem[PC+1],
@@ -175,12 +178,13 @@ module fetch(
       instr_mem[PC+8],
       instr_mem[PC+9]
     };
-  end  
-
-  always@(posedge clk) 
-  begin 
     icode= instr[0:3];
     ifun= instr[4:7];
+
+    if(icode==4'b0000) //nop
+    begin
+      valP=PC+64'd1;
+    end
 
     if(icode==4'b0010) //cmovxx
     begin
@@ -243,14 +247,7 @@ module fetch(
       valP=PC+64'd2;
     end
   end
-  // always@(posedge clk)
-  // begin 
-  //   stored = 1;
-  //   
-  //   stored = 0;
-  //   PC[31:0] = {PC_update_2+newvar,{2{1'b0}}};
-  // end
 
-  // assign instr=pipeline;
+  assign instrret=instr;
 
 endmodule
