@@ -27,7 +27,7 @@ module fetch(
 
   //cmovxx
     instr_mem[2]=8'b00100000; //2 fn
-    instr_mem[3]=8'b01000010; //rA rB
+    instr_mem[3]=8'b00010011; //rA rB
 
   //irmovq
     instr_mem[4]=8'b00110000; //3 0
@@ -105,7 +105,7 @@ module fetch(
     instr_mem[61]=8'b00000000; //rA F
   end  
 
-  always@(posedge clk) 
+  always@(negedge clk) 
   begin 
     instr={
       instr_mem[PC],

@@ -9,6 +9,7 @@ module proc();
   initial
   begin
     PC=64'd0;
+    clk=1'b0;
   end
 
   reg [63:0] reg_mem[0:14];
@@ -35,8 +36,8 @@ module proc();
   always #5 clk = ~clk;
 
   fetch fetch(clk,PC,icode,ifun,rA,rB,valC,valP);
-  decode decode(icode,rA,rB,reg_mem[rA],reg_mem[rB],reg_mem[4],valA,valB);
-  execute execute(icode,ifun,valA,valB,valC,valE,CC);
+  decode decode(clk,icode,rA,rB,reg_mem[rA],reg_mem[rB],reg_mem[4],valA,valB);
+  execute execute(clk,icode,ifun,valA,valB,valC,valE,CC);
   //memory memory(icode,valA,valB,valE,valP,valM);
   //write_back wb(icode,rA,rB,valA,valB,valE,valM);
 

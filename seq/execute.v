@@ -1,10 +1,11 @@
 `timescale 1ns / 1ps
 
 module execute(
-  icode,ifun,valA,valB,valC,
-  valE,CC
+  clk,icode,ifun,valA,valB,valC,
+  valE,cnd
 );
 
+  input clk;
   input [3:0] icode;
   input [3:0] ifun;
   input [63:0] valA;
@@ -12,9 +13,9 @@ module execute(
   input [63:0] valC;
 
   output reg [63:0] valE; 
-  output reg CC;
+  output reg cnd;
 
-  always@(icode)
+  always@(posedge clk)
   begin
     if(icode==4'b0010) //cmovxx
     begin
