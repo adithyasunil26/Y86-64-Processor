@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module fetch(
-  PC,
-  icode,ifun,rA,rB,valC
+  clk,PC,
+  icode,ifun,rA,rB,valC,valP
 );
 
   input [63:0] PC;
@@ -11,6 +11,7 @@ module fetch(
   output reg [3:0] rA;
   output reg [3:0] rB; 
   output reg [63:0] valC;
+  output reg [63:0] valP;
 
   reg [7:0] instr_mem[0:1023];
 
@@ -176,7 +177,7 @@ module fetch(
     };
   end  
 
-  always@(instr) 
+  always@(posedge clk) 
   begin 
     icode= instr[0:3];
     ifun= instr[4:7];
@@ -185,46 +186,61 @@ module fetch(
     begin
       rA=instr[8:11];
       rB=instr[12:15];
+      valP=PC+64'd2;
     end
     if(icode==4'b0011) //irmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
+      valC=instr[16:79];
+      valP=PC+64'd10;
     end
     if(icode==4'b0100) //rmmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valC=instr[16:79];
+      valP=PC+64'd10;
     end
     if(icode==4'b0101) //mrmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valC=instr[16:79];
+      valP=PC+64'd10;
     end
     if(icode==4'b0110) //OPq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
+      valP=PC+64'd2;
     end
     if(icode==4'b0111) //jxx
     begin
       valC=instr[8:71];
+      valP=PC+64'd1;
     end
     if(icode==4'b1000) //call
     begin
       valC=instr[8:71];
+      valP=PC+64'd10;
+    end
+    if(icode==4'b1001) //ret
+    begin
+      valC=instr[8:71];
+      valP=PC+64'd1;
     end
     if(icode==4'b1010) //pushq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
+      valP=PC+64'd2;
     end
     if(icode==4'b1011) //popq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
+      valP=PC+64'd2;
     end
   end
   // always@(posedge clk)
