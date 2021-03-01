@@ -1,10 +1,11 @@
 `timescale 1ns / 1ps
 
 module decode(
-  icode,rA,rB,reg_memrA,reg_memrB,reg_memr4,
+  clk,icode,rA,rB,reg_memrA,reg_memrB,reg_memr4,
   valA,valB
 );
 
+  input clk;
   input [3:0] icode;
   input [3:0] rA;
   input [3:0] rB; 
@@ -15,7 +16,7 @@ module decode(
   output reg [63:0] valA;
   output reg [63:0] valB; 
 
-  always@(icode)
+  always@(posedge clk)
   begin
     if(icode==4'b0010) //cmovxx
     begin
