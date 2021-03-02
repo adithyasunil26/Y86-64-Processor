@@ -1,5 +1,7 @@
 `timescale 1ns / 1ps
 
+`include "./ALU/alu.v"
+
 module execute(
   clk,icode,ifun,valA,valB,valC,
   valE,cnd
@@ -15,6 +17,28 @@ module execute(
   output reg [63:0] valE; 
   output reg cnd;
 
+  reg [1:0]control;
+  reg signed [63:0]a;
+  reg signed [63:0]b;
+
+  wire signed [63:0]ans;
+  wire overflow;
+
+  alu alu(
+    .control(control),
+    .a(a),
+    .b(b),
+    .ans(ans),
+    .overflow(overflow)
+  );
+
+  initial
+  begin
+    control=2'b00;
+		a = 64'b0;
+		b = 64'b0;
+  end
+  
   always@(posedge clk)
   begin
     if(icode==4'b0010) //cmovxx
@@ -38,19 +62,32 @@ module execute(
       if(ifun==4'b0000) //add
       begin
         //valE=valA+valB;
+        control=2'b00;
+		    a = valA;
+		    b = valB;
       end
       if(ifun==4'b0001) //sub
       begin
         //valE=valA-valB;
+        control=2'b01;
+		    a = valA;
+		    b = valB;
       end
       if(ifun==4'b0010) //and
       begin
         //valE=valA.valB;
+        control=2'b10;
+		    a = valA;
+		    b = valB;
       end
       if(ifun==4'b0011) //xor
       begin
         //valE=valA^valB;
+        control=2'b11;
+		    a = valA;
+		    b = valB;
       end
+      valE=ans;
     end
     if(icode==4'b0111) //jxx
     begin
