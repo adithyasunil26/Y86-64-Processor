@@ -4,7 +4,7 @@ module xor64x1(
   input signed [63:0]a,
   input signed [63:0]b,
   output signed [63:0]ans
-  );
+);
 
   genvar i;
 

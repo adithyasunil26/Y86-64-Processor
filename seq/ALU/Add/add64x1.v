@@ -4,7 +4,8 @@ module add64x1(
   input signed [63:0]a,
   input signed [63:0]b,
   output signed [63:0]sum,
-  output overflow);
+  output overflow
+);
 
   wire [64:0]c;
   assign c[0]=1'b0;

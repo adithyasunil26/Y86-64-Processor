@@ -4,7 +4,8 @@ module sub64x1(
   input signed [63:0]a,
   input signed [63:0]b,
   output signed [63:0]ans,
-  output overflow);
+  output overflow
+);
 
   wire [63:0]nb;
   not64x1 g1(b,nb);

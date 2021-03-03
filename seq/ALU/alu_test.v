@@ -17,8 +17,6 @@ module Alu_test;
   );
 
   initial begin
-		$dumpfile("Alu_test.vcd");
-    $dumpvars(0,Alu_test);
     control=2'b00;
 		a = 64'b0;
 		b = 64'b0;

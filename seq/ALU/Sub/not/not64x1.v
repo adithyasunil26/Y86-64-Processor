@@ -3,7 +3,7 @@
 module not64x1(
   input signed [63:0]a,
   output signed [63:0]ans
-  );
+);
 
   genvar i;
 

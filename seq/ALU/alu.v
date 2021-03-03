@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
-`include "./Add/add64x1.v"
-`include "./Add/add1x1.v"
-`include "./Sub/sub64x1.v"
-`include "./Sub/not/not1x1.v"
-`include "./Sub/not/not64x1.v"
-`include "./Xor/xor64x1.v"
-`include "./Xor/xor1x1.v"
-`include "./And/and64x1.v"
-`include "./And/and1x1.v"
+`include "./ALU/Add/add64x1.v"
+`include "./ALU/Add/add1x1.v"
+`include "./ALU/Sub/sub64x1.v"
+`include "./ALU/Sub/not/not1x1.v"
+`include "./ALU/Sub/not/not64x1.v"
+`include "./ALU/Xor/xor64x1.v"
+`include "./ALU/Xor/xor1x1.v"
+`include "./ALU/And/and64x1.v"
+`include "./ALU/And/and1x1.v"
 
 module alu(
   input [1:0]control,
@@ -16,7 +16,7 @@ module alu(
   input signed [63:0]b,
   output signed [63:0]ans,
   output overflow
-  );
+);
   
   wire signed [63:0]ans1;
   wire signed [63:0]ans2;
@@ -53,4 +53,5 @@ module alu(
 
   assign ans= ansfinal;
   assign overflow= overflowfinal;
+
 endmodule
