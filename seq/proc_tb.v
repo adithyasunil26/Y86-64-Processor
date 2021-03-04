@@ -6,7 +6,6 @@ module fetchdecodetb;
   reg [63:0] reg_mem[0:14];
   reg [63:0] data_mem[0:255];
 
-
   wire [3:0] icode;
   wire [3:0] ifun;
   wire [3:0] rA;
@@ -150,6 +149,23 @@ module fetchdecodetb;
       valM=data_mem[valE];
       reg_mem[4]=valE;
       reg_mem[rA]=valM;
+    end
+
+    if(icode==4'b1000) //call
+    begin
+      PC=valC;
+    end
+    if(icode==4'b0111 && cnd) //jxx
+    begin
+      PC=valC;
+    end
+    if(icode==4'b1001) //ret
+    begin
+      PC=valM;
+    end
+    else
+    begin
+      PC=valP;
     end
   end
 

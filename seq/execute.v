@@ -17,6 +17,7 @@ module execute(
   output reg [63:0] valE; 
   output reg cnd;
 
+  reg signed [63:0]anss;
   reg [1:0]control;
   reg signed [63:0]a;
   reg signed [63:0]b;
@@ -24,7 +25,7 @@ module execute(
   wire signed [63:0]ans;
   wire overflow;
 
-  alu alu(
+  alu alu1(
     .control(control),
     .a(a),
     .b(b),
@@ -87,7 +88,8 @@ module execute(
 		    a = valA;
 		    b = valB;
       end
-      valE=ans;
+      assign anss=ans;
+      valE=anss;
     end
     if(icode==4'b0111) //jxx
     begin

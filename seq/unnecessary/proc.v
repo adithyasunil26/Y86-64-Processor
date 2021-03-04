@@ -41,6 +41,7 @@ module proc();
   //memory memory(icode,valA,valB,valE,valP,valM);
   //write_back wb(icode,rA,rB,valA,valB,valE,valM);
 
+  //memory and write_back
   wire a;
   assign a=1'b1;
 
@@ -93,8 +94,6 @@ module proc();
       reg_mem[rA]=valM;
     end
   end
-
-  assign a=1'b0;
 
   initial 
 		$monitor("icode=%b ifun=%b \n",icode,ifun);
