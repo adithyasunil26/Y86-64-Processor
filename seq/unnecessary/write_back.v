@@ -14,7 +14,7 @@ module write_back(
   input [63:0] valE;
   input [63:0] valM;
 
-  always@(posedge clk)
+  always@(*)
   begin
     if(icode==4'b0010) //cmovxx
     begin

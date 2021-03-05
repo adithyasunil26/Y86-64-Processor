@@ -2,7 +2,7 @@
 
 module fetch(
   clk,PC,
-  icode,ifun,rA,rB,valC,valP
+  icode,ifun,rA,rB,valC,valP,instr_valid,imem_error
 );
 
   input clk;
@@ -13,7 +13,9 @@ module fetch(
   output reg [3:0] rB; 
   output reg [63:0] valC;
   output reg [63:0] valP;
-
+  output reg instr_valid;
+  output reg imem_error;
+  
   reg [7:0] instr_mem[0:1023];
 
   reg [0:79] instr;
@@ -109,6 +111,13 @@ module fetch(
 
   always@(posedge clk) 
   begin 
+
+    imem_error=0;
+    if(PC>1023)
+    begin
+      imem_error=1;
+    end
+
     instr={
       instr_mem[PC],
       instr_mem[PC+1],
@@ -121,76 +130,82 @@ module fetch(
       instr_mem[PC+8],
       instr_mem[PC+9]
     };
+
     icode= instr[0:3];
     ifun= instr[4:7];
+
+    instr_valid=1'b1;
 
     if(icode==4'b0000) //halt
     begin
       valP=PC+64'd1;
     end
-    if(icode==4'b0001) //nop
+    else if(icode==4'b0001) //nop
     begin
       valP=PC+64'd1;
     end
-    if(icode==4'b0010) //cmovxx
+    else if(icode==4'b0010) //cmovxx
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valP=PC+64'd2;
     end
-    if(icode==4'b0011) //irmovq
+    else if(icode==4'b0011) //irmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valC=instr[16:79];
       valP=PC+64'd10;
     end
-    if(icode==4'b0100) //rmmovq
+    else if(icode==4'b0100) //rmmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valC=instr[16:79];
       valP=PC+64'd10;
     end
-    if(icode==4'b0101) //mrmovq
+    else if(icode==4'b0101) //mrmovq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valC=instr[16:79];
       valP=PC+64'd10;
     end
-    if(icode==4'b0110) //OPq
+    else if(icode==4'b0110) //OPq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valP=PC+64'd2;
     end
-    if(icode==4'b0111) //jxx
+    else if(icode==4'b0111) //jxx
     begin
       valC=instr[8:71];
       valP=PC+64'd9;
     end
-    if(icode==4'b1000) //call
+    else if(icode==4'b1000) //call
     begin
       valC=instr[8:71];
       valP=PC+64'd9;
     end
-    if(icode==4'b1001) //ret
+    else if(icode==4'b1001) //ret
     begin
-      valC=instr[8:71];
       valP=PC+64'd1;
     end
-    if(icode==4'b1010) //pushq
+    else if(icode==4'b1010) //pushq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valP=PC+64'd2;
     end
-    if(icode==4'b1011) //popq
+    else if(icode==4'b1011) //popq
     begin
       rA=instr[8:11];
       rB=instr[12:15];
       valP=PC+64'd2;
+    end
+    else 
+    begin
+      instr_valid=1'b0;
     end
   end
 

@@ -19,11 +19,11 @@ module pc_update(
     begin
       updated_pc=valC;
     end
-    if(icode==4'b1000) //call
+    else if(icode==4'b1000) //call
     begin
       updated_pc=valC;
     end
-    if(icode==4'b1001) //ret
+    else if(icode==4'b1001) //ret
     begin
       updated_pc=valM;
     end
