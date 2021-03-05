@@ -90,26 +90,26 @@ module proctb;
     clk=0;
     PC=64'd0;
 
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
-    #10 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
   end 
 
   always@(*)
