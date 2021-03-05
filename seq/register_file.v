@@ -43,41 +43,35 @@ module register_file(
     begin
       valA=reg_mem[rA];
     end
-    // if(icode==4'b0011) //irmovq
-    // begin
-    // end
-    if(icode==4'b0100) //rmmovq
+    else if(icode==4'b0100) //rmmovq
     begin
       valA=reg_mem[rA];
       valB=reg_mem[rB];
     end
-    if(icode==4'b0101) //mrmovq
+    else if(icode==4'b0101) //mrmovq
     begin
       valB=reg_mem[rB];
     end
-    if(icode==4'b0110) //OPq
+    else if(icode==4'b0110) //OPq
     begin
       valA=reg_mem[rA];
       valB=reg_mem[rB];
     end
-    // if(icode==4'b0111) //jxx
-    // begin
-    // end
-    if(icode==4'b1000) //call
+    else if(icode==4'b1000) //call
     begin
       valB=reg_mem[4]; //rsp
     end
-    if(icode==4'b1001) //ret
+    else if(icode==4'b1001) //ret
     begin
       valA=reg_mem[4]; //rsp
       valB=reg_mem[4]; //rsp
     end
-    if(icode==4'b1010) //pushq
+    else if(icode==4'b1010) //pushq
     begin
       valA=reg_mem[rA];
       valB=reg_mem[4]; //rsp
     end
-    if(icode==4'b1011) //popq
+    else if(icode==4'b1011) //popq
     begin
       valA=reg_mem[4]; //rsp
       valB=reg_mem[4]; //rsp
@@ -91,38 +85,31 @@ module register_file(
     begin
       reg_mem[rB]=valE;
     end
-    if(icode==4'b0011) //irmovq
+    else if(icode==4'b0011) //irmovq
     begin
       reg_mem[rB]=valE;
     end
-    // if(icode==4'b0100) //rmmovq
-    // begin
-    // end
-    if(icode==4'b0101) //mrmovq
+    else if(icode==4'b0101) //mrmovq
     begin
       reg_mem[rA]=valM;
     end
-    if(icode==4'b0110) //OPq
+    else if(icode==4'b0110) //OPq
     begin
       reg_mem[rB]=valE;
     end
-    // if(icode==4'b0111) //jxx
-    // begin
-    // end
-    if(icode==4'b1000) //call
+    else if(icode==4'b1000) //call
     begin
       reg_mem[4]=valE;
     end
-    if(icode==4'b1001) //ret
+    else if(icode==4'b1001) //ret
     begin
       reg_mem[4]=valE;
     end
-
-    if(icode==4'b1010) //pushq
+    else if(icode==4'b1010) //pushq
     begin
       reg_mem[4]=valE;
     end
-    if(icode==4'b1011) //popq
+    else if(icode==4'b1011) //popq
     begin
       reg_mem[4]=valE;
       reg_mem[rA]=valM;
