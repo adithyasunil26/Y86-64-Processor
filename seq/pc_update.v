@@ -15,9 +15,12 @@ module pc_update(
 
   always@(*)
   begin
-    if(icode==4'b0111 && cnd) //jxx
+    if(icode==4'b0111) //jxx
     begin
-      updated_pc=valC;
+      if(cnd==1'b1)
+      begin
+        updated_pc=valC;
+      end
     end
     else if(icode==4'b1000) //call
     begin

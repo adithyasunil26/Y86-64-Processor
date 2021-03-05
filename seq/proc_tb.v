@@ -56,6 +56,7 @@ module proctb;
     .icode(icode),
     .rA(rA),
     .rB(rB),
+    .cnd(cnd),
     .valA(valA),
     .valB(valB),
     .val4(val4),

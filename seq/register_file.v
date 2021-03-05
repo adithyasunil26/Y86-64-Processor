@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 
 module register_file(
-  clk,icode,rA,rB,
+  clk,icode,rA,rB,cnd,
   valA,valB,val4,
   valE,valM
 );
 
   input clk;
+  input cnd;
   input [3:0] icode;
   input [3:0] rA;
   input [3:0] rB;
@@ -83,7 +84,10 @@ module register_file(
   begin
     if(icode==4'b0010) //cmovxx
     begin
-      reg_mem[rB]=valE;
+      if(cnd==1'b1)
+      begin
+        reg_mem[rB]=valE;
+      end
     end
     else if(icode==4'b0011) //irmovq
     begin
