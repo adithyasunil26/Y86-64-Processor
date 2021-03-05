@@ -4,6 +4,7 @@ module fetch(
   clk,PC,
   icode,ifun,rA,rB,valC,valP
 );
+
   input clk;
   input [63:0] PC;
   output reg [3:0] icode;
