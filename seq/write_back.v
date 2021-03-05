@@ -1,8 +1,10 @@
 `timescale 1ns / 1ps
 
 module write_back(
-  icode,rA,rB,valA,valB,valE,valM
+  clk,icode,rA,rB,valA,valB,valE,valM
 );
+
+  input clk;
 
   input [3:0] icode;
   input [3:0] rA;
@@ -12,7 +14,7 @@ module write_back(
   input [63:0] valE;
   input [63:0] valM;
 
-  always@(icode)
+  always@(posedge clk)
   begin
     if(icode==4'b0010) //cmovxx
     begin

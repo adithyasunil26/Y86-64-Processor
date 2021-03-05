@@ -1,9 +1,11 @@
 `timescale 1ns / 1ps
 
 module memory(
-  icode,valA,valB,valE,valP,valM
+  clk,icode,valA,valB,valE,valP,valM
 );
 
+  input clk;
+  
   input [3:0] icode;
   input [63:0] valA;
   input [63:0] valB;
@@ -12,7 +14,9 @@ module memory(
   
   output reg [63:0] valM;
 
-  always@(icode)
+  reg [63:0] data_mem[0:255];
+
+  always@(*)
   begin
     // if(icode==4'b0010) //cmovxx
     // begin

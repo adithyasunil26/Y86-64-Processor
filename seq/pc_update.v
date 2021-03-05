@@ -1,52 +1,36 @@
 `timescale 1ns / 1ps
 
 module pc_update(
-  pc,icode,updated_pc
+  clk,PC,cnd,icode,valC,valM,valP,
+  updated_pc
 );
-
+  input clk;
+  input cnd;
   input [3:0] icode;
-  input [63:0] pc;
-  output [63:0] updated_pc;
-  assign updated_pc=pc+64'd10;
-  // if(icode==4'b0010) //cmovxx
-  // begin
-  //   reg_mem[rB]=valE;
-  // end
-  // if(icode==4'b0011) //irmovq
-  // begin
-  //   reg_mem[rB]=valE;
-  // end
-  // // if(icode==4'b0100) //rmmovq
-  // // begin
-  // // end
-  // if(icode==4'b0101) //mrmovq
-  // begin
-  //   reg_mem[rA]=valM;
-  // end
-  // if(icode==4'b0110) //OPq
-  // begin
-  //   reg_mem[rB]=valE;
-  // end
-  // // if(icode==4'b0111) //jxx
-  // // begin
-  // // end
-  // if(icode==4'b1000) //call
-  // begin
-  //   reg_mem[4]=valE;
-  // end
-  // if(icode==4'b1001) //ret
-  // begin
-  //   reg_mem[4]=valE;
-  // end
+  input [63:0] valC;
+  input [63:0] valP;
+  input [63:0] valM;
+  input [63:0] PC;
+  output reg [63:0] updated_pc;
 
-  // if(icode==4'b1010) //pushq
-  // begin
-  //   reg_mem[4]=valE;
-  // end
-  // if(icode==4'b1011) //popq
-  // begin
-  //   reg_mem[4]=valE;
-  //   reg_mem[rA]=valM;
-  // end
+  always@(*)
+  begin
+    if(icode==4'b0111 && cnd) //jxx
+    begin
+      updated_pc=valC;
+    end
+    if(icode==4'b1000) //call
+    begin
+      updated_pc=valC;
+    end
+    if(icode==4'b1001) //ret
+    begin
+      updated_pc=valM;
+    end
+    else
+    begin
+      updated_pc=valP;
+    end
+  end
 
 endmodule
