@@ -3,7 +3,10 @@
 module register_file(
   clk,icode,rA,rB,cnd,
   valA,valB,val4,
-  valE,valM
+  valE,valM,
+  reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,
+  reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,
+  reg_mem12,reg_mem13,reg_mem14
 );
 
   input clk;
@@ -16,6 +19,22 @@ module register_file(
   output reg [63:0] val4;
   input [63:0] valE;
   input [63:0] valM;
+
+  output reg [63:0] reg_mem0;
+  output reg [63:0] reg_mem1;
+  output reg [63:0] reg_mem2;
+  output reg [63:0] reg_mem3;
+  output reg [63:0] reg_mem4;
+  output reg [63:0] reg_mem5;
+  output reg [63:0] reg_mem6;
+  output reg [63:0] reg_mem7;
+  output reg [63:0] reg_mem8;
+  output reg [63:0] reg_mem9;
+  output reg [63:0] reg_mem10;
+  output reg [63:0] reg_mem11;
+  output reg [63:0] reg_mem12;
+  output reg [63:0] reg_mem13;
+  output reg [63:0] reg_mem14;
 
   reg [63:0] reg_mem[0:14];
 
@@ -77,10 +96,25 @@ module register_file(
       valA=reg_mem[4]; //rsp
       valB=reg_mem[4]; //rsp
     end
+    reg_mem0=reg_mem[0];
+    reg_mem1=reg_mem[1];
+    reg_mem2=reg_mem[2];
+    reg_mem3=reg_mem[3];
+    reg_mem4=reg_mem[4];
+    reg_mem5=reg_mem[5];
+    reg_mem6=reg_mem[6];
+    reg_mem7=reg_mem[7];
+    reg_mem8=reg_mem[8];
+    reg_mem9=reg_mem[9];
+    reg_mem10=reg_mem[10];
+    reg_mem11=reg_mem[11];
+    reg_mem12=reg_mem[12];
+    reg_mem13=reg_mem[13];
+    reg_mem14=reg_mem[14];
   end
 
   //write_back
-  always@(posedge clk)
+  always@(negedge clk)
   begin
     if(icode==4'b0010) //cmovxx
     begin
@@ -118,6 +152,21 @@ module register_file(
       reg_mem[4]=valE;
       reg_mem[rA]=valM;
     end
+    reg_mem0=reg_mem[0];
+    reg_mem1=reg_mem[1];
+    reg_mem2=reg_mem[2];
+    reg_mem3=reg_mem[3];
+    reg_mem4=reg_mem[4];
+    reg_mem5=reg_mem[5];
+    reg_mem6=reg_mem[6];
+    reg_mem7=reg_mem[7];
+    reg_mem8=reg_mem[8];
+    reg_mem9=reg_mem[9];
+    reg_mem10=reg_mem[10];
+    reg_mem11=reg_mem[11];
+    reg_mem12=reg_mem[12];
+    reg_mem13=reg_mem[13];
+    reg_mem14=reg_mem[14];
   end
 
 endmodule
