@@ -195,7 +195,77 @@ module execute(
     end
     if(icode==4'b0111) //jxx
     begin
-      //cnd=cond(cc,ifun)
+      if(ifun==4'b0000)//jmp
+      begin
+        cnd=1;
+      end
+      else if(ifun==4'b0001)//jle
+      begin
+      // (sf^of)||zf
+        xin1=sf;
+        xin2=of;
+        if(xout)
+        begin
+          cnd=1;
+        end
+        else if(zf)
+        begin
+          cnd=1;
+        end
+      end
+      else if(ifun==4'b0010)//jl
+      begin
+      // sf^of
+        xin1=sf;
+        xin2=of;
+        if(xout)
+        begin
+          cnd=1;
+        end
+      end
+      else if(ifun==4'b0011)//je
+      begin
+      // zf
+        if(zf)
+        begin
+          cnd=1;
+        end
+      end
+      else if(ifun==4'b0100)//jne
+      begin
+      // !zf
+        nin1=zf;
+        if(nout)
+        begin
+          cnd=1;
+        end
+      end
+      else if(ifun==4'b0101)//jge
+      begin
+      // !(sf^of)
+        xin1=sf;
+        xin2=of;
+        nin1=xout;
+        if(nout)
+        begin
+          cnd=1;
+        end
+      end
+      else if(ifun==4'b0110)//jg
+      begin
+      //!(sf^of)) && (!zf)
+        xin1=sf;
+        xin2=of;
+        nin1=xout;
+        if(nout)
+        begin
+          nin1=zf;
+          if(nout)
+          begin
+            cnd=1;
+          end
+        end
+      end  
     end
     if(icode==4'b1000) //call
     begin
