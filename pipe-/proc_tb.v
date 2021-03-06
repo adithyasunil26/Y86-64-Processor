@@ -1,174 +1,194 @@
 `timescale 1ns / 1ps
 
-module fetchdecodetb;
+module proctb;
   reg clk;
+  
   reg [63:0] PC;
-  reg [63:0] reg_mem[0:14];
-  reg [63:0] data_mem[0:255];
 
-  wire [3:0] icode;
-  wire [3:0] ifun;
-  wire [3:0] rA;
-  wire [3:0] rB; 
-  wire [63:0] valC;
-  wire [63:0] valP;
-  wire [63:0] valA;
-  wire [63:0] valB;
-  wire [63:0] valE;
-  reg [63:0] valM;
-  wire cnd;
+  reg stat[0:2]; // |AOK|INS|HLT|
 
+  // wire [3:0] icode;
+  // wire [3:0] ifun;
+  // wire [3:0] rA;
+  // wire [3:0] rB; 
+  // wire [63:0] valC;
+  // wire [63:0] valP;
+  // wire instr_valid;
+  // wire imem_error;
+  // wire [63:0] valA;
+  // wire [63:0] valB;
+  // wire [63:0] valE;
+  // wire [63:0] val4;
+  // wire [63:0] valM;
+  // wire cnd;
+  // wire hltins;
+  
+  wire [63:0] updated_pc;
+  wire [63:0] f_pred_pc;
+
+  wire [2:0] f_stat;
+  wire [3:0] f_icode;
+  wire [3:0] f_ifun;
+  wire [63:0] f_rA;
+  wire [63:0] f_rB;
+  wire [63:0] f_valC;
+  wire [63:0] f_valP;
+  
+  wire reg [2:0] d_stat;
+  wire reg [3:0] d_icode;
+  wire reg [3:0] d_ifun;
+  wire reg [63:0] d_rA;
+  wire reg [63:0] d_rB;
+  wire reg [63:0] d_valC;
+  wire reg [63:0] d_valP;
+
+  wire [63:0] reg_mem0;
+  wire [63:0] reg_mem1;
+  wire [63:0] reg_mem2;
+  wire [63:0] reg_mem3;
+  wire [63:0] reg_mem4;
+  wire [63:0] reg_mem5;
+  wire [63:0] reg_mem6;
+  wire [63:0] reg_mem7;
+  wire [63:0] reg_mem8;
+  wire [63:0] reg_mem9;
+  wire [63:0] reg_mem10;
+  wire [63:0] reg_mem11;
+  wire [63:0] reg_mem12;
+  wire [63:0] reg_mem13;
+  wire [63:0] reg_mem14;
+  wire [63:0] datamem;
+
+
+
+  f_reg(
+    .clk(clk),
+    .pred_pc(updated_pc),
+    .f_pred_pc(f_pred_pc)
+  );  
 
   fetch fetch(
     .clk(clk),
     .PC(PC),
-    .icode(icode),
-    .ifun(ifun),
-    .rA(rA),
-    .rB(rB),
-    .valC(valC),
-    .valP(valP)
-  );
-
-  decode decode(
-    .clk(clk),
-    .icode(icode),
-    .rA(rA),
-    .rB(rB),
-    .reg_memrA(reg_mem[rA]),
-    .reg_memrB(reg_mem[rB]),
-    .reg_memr4(reg_mem[4]),
-    .valA(valA),
-    .valB(valB)
+    .icode(f_icode),
+    .ifun(f_ifun),
+    .rA(f_rA),
+    .rB(f_rB),
+    .valC(f_valC),
+    .valP(f_valP),
+    .instr_valid(instr_valid),
+    .imem_error(imem_error),
+    .hlt(hltins)
   );
 
   execute execute(
     .clk(clk),
-    .icode(icode),
-    .ifun(ifun),
-    .valA(valA),
-    .valB(valB),
-    .valC(valC),
-    .valE(valE),
+    .icode(e_icode),
+    .ifun(e_ifun),
+    .valA(e_valA),
+    .valB(e_valB),
+    .valC(e_valC),
+    .valE(e_valE),
     .cnd(cnd)
   );
 
+  register_file reg_file(
+    .clk(clk),
+    .icode(icode),
+    .rA(rA),
+    .rB(rB),
+    .cnd(cnd),
+    .valA(valA),
+    .valB(valB),
+    .val4(val4),
+    .valE(valE),
+    .valM(valM),
+    .reg_mem0(reg_mem0),
+    .reg_mem1(reg_mem1),
+    .reg_mem2(reg_mem2),
+    .reg_mem3(reg_mem3),
+    .reg_mem4(reg_mem4),
+    .reg_mem5(reg_mem5),
+    .reg_mem6(reg_mem6),
+    .reg_mem7(reg_mem7),
+    .reg_mem8(reg_mem8),
+    .reg_mem9(reg_mem9),
+    .reg_mem10(reg_mem10),
+    .reg_mem11(reg_mem11),
+    .reg_mem12(reg_mem12),
+    .reg_mem13(reg_mem13),
+    .reg_mem14(reg_mem14)
+  );
+
+  memory mem(
+    .clk(clk),
+    .icode(icode),
+    .valA(valA),
+    .valB(valB),
+    .valE(valE),
+    .valP(valP),
+    .valM(valM),
+    .datamem(datamem)
+  );
+
+  pc_update pcup(
+    .clk(clk),
+    .PC(PC),
+    .icode(icode),
+    .cnd(cnd),
+    .valC(valC),
+    .valM(valM),
+    .valP(valP),
+    .updated_pc(updated_pc)
+  ); 
+
+  // always #5 clk=~clk;
+
   initial begin
-    reg_mem[0]=64'd0;
-    reg_mem[1]=64'd1;
-    reg_mem[2]=64'd2;
-    reg_mem[3]=64'd3;
-    reg_mem[4]=64'd4;
-    reg_mem[5]=64'd5;
-    reg_mem[6]=64'd6;
-    reg_mem[7]=64'd7;
-    reg_mem[8]=64'd8;
-    reg_mem[9]=64'd9;
-    reg_mem[10]=64'd10;
-    reg_mem[11]=64'd11;
-    reg_mem[12]=64'd12;
-    reg_mem[13]=64'd13;
-    reg_mem[14]=64'd14;
-
+    stat[0]=1;
+    stat[1]=0;
+    stat[2]=0;
     clk=0;
-    PC=64'd0;
+    PC=64'd2;
 
-    #10 clk=~clk;PC=64'd0;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;PC=valP;
-    #10 clk=~clk;
-    #10 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
+    #5 clk=~clk;
   end 
-  
-  always@(posedge clk)
+
+  always@(*)
   begin
-    if(icode==4'b0010) //cmovxx
-    begin
-      reg_mem[rB]=valE;
-    end
-    if(icode==4'b0011) //irmovq
-    begin
-      reg_mem[rB]=valE;
-    end
-    if(icode==4'b0100) //rmmovq
-    begin
-      data_mem[valE]=valA;
-    end
-    if(icode==4'b0101) //mrmovq
-    begin
-      valM=data_mem[valE];
-      reg_mem[rA]=valM;
-    end
-    if(icode==4'b0110) //OPq
-    begin
-      reg_mem[rB]=valE;
-    end
-    // if(icode==4'b0111) //jxx
-    // begin
-    // end
-    if(icode==4'b1000) //call
-    begin
-      data_mem[valE]=valP;
-      reg_mem[4]=valE;
-    end
-    if(icode==4'b1001) //ret
-    begin
-      valM=data_mem[valA];
-      reg_mem[4]=valE;
-    end
+    PC=f_pred_pc;
+  end
 
-    if(icode==4'b1010) //pushq
+  always@(*)
+  begin
+    if(hltins)
     begin
-      data_mem[valE]=valA;
-      reg_mem[4]=valE;
+      stat[2]=hltins;
+      stat[1]=1'b0;
+      stat[0]=1'b0;
     end
-    if(icode==4'b1011) //popq
+    else if(instr_valid)
     begin
-      valM=data_mem[valE];
-      reg_mem[4]=valE;
-      reg_mem[rA]=valM;
-    end
-
-    if(icode==4'b1000) //call
-    begin
-      PC=valC;
-    end
-    if(icode==4'b0111 && cnd) //jxx
-    begin
-      PC=valC;
-    end
-    if(icode==4'b1001) //ret
-    begin
-      PC=valM;
+      stat[1]=instr_valid;
+      stat[2]=1'b0;
+      stat[0]=1'b0;
     end
     else
     begin
-      PC=valP;
+      stat[0]=1'b1;
+      stat[1]=1'b0;
+      stat[2]=1'b0;
     end
   end
 
   initial 
-		$monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valE=%d valM=%d\n",clk,icode,ifun,rA,rB,valA,valB,valE,valM);
+		$monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d 5=%d 6=%d 7=%d 8=%d 9=%d 10=%d 11=%d 12=%d 13=%d 14=%d datamem=%d\n",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,reg_mem12,reg_mem13,reg_mem14,datamem);
+		
 endmodule
