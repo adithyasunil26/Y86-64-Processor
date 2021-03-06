@@ -64,6 +64,9 @@ module fetch(
     instr_mem[30]=8'b00000000; //D
     instr_mem[31]=8'b00000001; //D
 
+  //halt
+    instr_mem[32]=8'b00000000; // 0 0
+
   // //OPq
   //   instr_mem[32]=8'b01100000; //5 fn
   //   instr_mem[33]=8'b00100001; //rA rB
