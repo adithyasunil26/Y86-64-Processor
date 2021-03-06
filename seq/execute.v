@@ -24,9 +24,9 @@ module execute(
   always@(*)
   begin
     
-    zf=(ans==64'd0);
-    sf=(ans<64'd0);
-    of=(a<64'd00==b<64'd0)&&(ans<64'd0!=a<64'd0);
+    zf=(ans==0);
+    sf=(ans<0);
+    of=(a<0==b<0)&&(ans<0!=a<0);
 
   end
 

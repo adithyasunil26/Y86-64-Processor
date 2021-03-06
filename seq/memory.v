@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module memory(
-  clk,icode,valA,valB,valE,valP,valM
+  clk,icode,valA,valB,valE,valP,valM,datamem
 );
 
   input clk;
@@ -13,6 +13,7 @@ module memory(
   input [63:0] valP;
   
   output reg [63:0] valM;
+  output reg [63:0] datamem;
 
   reg [63:0] data_mem[0:255];
 
@@ -66,6 +67,7 @@ module memory(
     begin
       valM=data_mem[valE];
     end
+    datamem=data_mem[valE];
   end
   
 endmodule
