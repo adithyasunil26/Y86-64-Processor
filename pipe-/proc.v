@@ -42,11 +42,15 @@ module proctb;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
 
+
+
   wire [2:0] m_stat;
   wire [3:0] m_icode;
   wire m_cnd;
   wire [63:0] m_valE;
   wire [63:0] m_valA;
+
+
 
   wire [63:0] reg_mem0;
   wire [63:0] reg_mem1;
@@ -92,7 +96,17 @@ module proctb;
   );
 
   m_reg(
-
+    .clk(clk),
+    .e_stat(e_stat),
+    .e_icode(e_icode),
+    .e_cnd(e_cnd),
+    .e_valE(e_valE),
+    .e_valA(e_valA),
+    .m_stat(m_stat),
+    .m_icode(m_icode),
+    .m_cnd(m_cnd),
+    .m_valE(m_valE),
+    .m_valA(m_valA)
   );
 
   fetch fetch(
