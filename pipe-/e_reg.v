@@ -29,8 +29,3 @@ module e_reg(
     e_valB = d_valB ;
   end
 endmodule
-
-
-
-
-
