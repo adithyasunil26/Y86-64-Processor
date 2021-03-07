@@ -26,13 +26,3 @@ module m_reg(
     m_valA = e_valA ;
   end
 endmodule
-
-
-
-
-
-
-
-
-
-
