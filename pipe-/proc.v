@@ -42,11 +42,11 @@ module proctb;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
 
-  wire reg [2:0] m_stat;
-  wire reg [3:0] m_icode;
+  wire [2:0] m_stat;
+  wire [3:0] m_icode;
   wire m_cnd;
-  m_valE;
-  m_valA;
+  wire [63:0] m_valE;
+  wire [63:0] m_valA;
 
   wire [63:0] reg_mem0;
   wire [63:0] reg_mem1;
