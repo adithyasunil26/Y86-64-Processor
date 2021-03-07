@@ -13,7 +13,7 @@ module m_reg(
   input [63:0] e_valA ;
   output reg [2:0]   m_stat ;
   output reg [3:0]   m_icode;
-  input              m_cnd  ; 
+  output reg          m_cnd ; 
   output reg [63:0]  m_valE ;
   output reg [63:0]  m_valA ;
 

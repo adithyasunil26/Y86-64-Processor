@@ -20,6 +20,6 @@ module w_reg(
     w_stat = m_stat ;
     w_icode= m_icode;
     w_valE = m_valE ;
-    w_valA = m_valM ;
+    w_valM = m_valM ;
   end
 endmodule
