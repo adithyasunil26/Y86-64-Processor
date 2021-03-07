@@ -55,7 +55,10 @@ module proctb;
   wire [63:0] m_valE;
   wire [63:0] m_valA;
 
-
+  wire [2:0]   w_stat ;
+  wire [3:0]   w_icode;
+  wire [63:0]  w_valE ;
+  wire [63:0]  w_valM ;
 
   wire [63:0] reg_mem0;
   wire [63:0] reg_mem1;
@@ -130,6 +133,29 @@ module proctb;
     .m_valA(m_valA)
   );
 
+  w_reg(
+    .clk(clk),
+    .m_stat(m_stat),
+    .m_icode(m_icode),
+    .m_valE(m_valE),
+    .m_valM(m_valM),
+    .w_stat(w_stat),
+    .w_icode(w_icode),
+    .w_valE(w_valE),
+    .w_valM(w_valM)
+  );
+
+  pc_update pcup(
+    .clk(clk),
+    .PC(PC),
+    .icode(icode),
+    .cnd(cnd),
+    .valC(valC),
+    .valM(valM),
+    .valP(valP),
+    .updated_pc(updated_pc)
+  ); 
+
   fetch fetch(
     .clk(clk),
     .PC(PC),
@@ -188,25 +214,14 @@ module proctb;
 
   memory mem(
     .clk(clk),
-    .icode(icode),
-    .valA(valA),
-    .valB(valB),
-    .valE(valE),
-    .valP(valP),
-    .valM(valM),
+    .icode(m_icode),
+    .valA(m_valA),
+    .valB(m_valB),
+    .valE(m_valE),
+    .valP(m_valP),
+    .valM(m_valM),
     .datamem(datamem)
   );
-
-  pc_update pcup(
-    .clk(clk),
-    .PC(PC),
-    .icode(icode),
-    .cnd(cnd),
-    .valC(valC),
-    .valM(valM),
-    .valP(valP),
-    .updated_pc(updated_pc)
-  ); 
 
   always #5 clk=~clk;
 
