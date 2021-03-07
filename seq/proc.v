@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module proctb;
+module proc;
   reg clk;
   
   reg [63:0] PC;
@@ -116,23 +116,24 @@ module proctb;
     .updated_pc(updated_pc)
   ); 
 
-  // always #5 clk=~clk;
+  always #5 clk=~clk;
 
   initial begin
     stat[0]=1;
     stat[1]=0;
     stat[2]=0;
     clk=0;
-    PC=64'd2;
+    PC=64'd32;
 
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
-    #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    // #5 clk=~clk;
+    #50 $finish;
   end 
 
   always@(*)
@@ -161,6 +162,8 @@ module proctb;
       stat[2]=1'b0;
     end
   end
+  
+
 
   initial 
 		$monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d 5=%d 6=%d 7=%d 8=%d 9=%d 10=%d 11=%d 12=%d 13=%d 14=%d datamem=%d\n",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,reg_mem12,reg_mem13,reg_mem14,datamem);

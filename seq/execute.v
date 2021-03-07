@@ -23,11 +23,9 @@ module execute(
 
   always@(*)
   begin
-    
     zf=(ans==0);
     sf=(ans<0);
     of=(a<0==b<0)&&(ans<0!=a<0);
-
   end
 
   reg signed [63:0]anss;
