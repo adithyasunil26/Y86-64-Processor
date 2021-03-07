@@ -69,10 +69,10 @@ module fetch(
 
   //OPq
     instr_mem[32]=8'b01100000; //5 fn
-    instr_mem[33]=8'b00100001; //rA rB
+    instr_mem[33]=8'b00100011; //rA rB
   //cmovxx
-    instr_mem[34]=8'b00100011; //2 fn
-    instr_mem[35]=8'b01010111; //rA rB
+    instr_mem[34]=8'b00100101; //2 fn
+    instr_mem[35]=8'b00000100; //rA rB
 
 
   // //jxx
