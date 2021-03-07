@@ -67,8 +67,22 @@ module proctb;
     .f_pred_pc(f_pred_pc)
   );  
 
-  m_reg(
-    
+  d_reg(
+    .clk(clk),
+    .f_stat(f_stat),
+    .f_icode(f_icode),
+    .f_ifun(f_ifun),
+    .f_rA(f_rA),
+    .f_rB(f_rB),
+    .f_valC(f_valC),
+    .f_valP(f_valP),
+    .d_stat(d_stat),
+    .d_icode(d_icode),
+    .d_ifun(d_ifun),
+    .d_rA(d_rA),
+    .d_rB(d_rB),
+    .d_valC(d_valC),
+    .d_valP(d_valP)
   );
 
   fetch fetch(
