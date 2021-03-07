@@ -4,7 +4,7 @@
 
 module execute(
   clk,icode,ifun,valA,valB,valC,
-  valE,cnd
+  valE,cnd,zf,sf,of
 );
 
   input clk;
@@ -17,17 +17,18 @@ module execute(
   output reg [63:0] valE; 
   output reg cnd;
 
-  reg zf;
-  reg sf;
-  reg of;
+  output reg zf;
+  output reg sf;
+  output reg of;
 
   always@(*)
   begin
-    
-    zf=(ans==0);
-    sf=(ans<0);
-    of=(a<0==b<0)&&(ans<0!=a<0);
-
+    if(icode==4'b0110 && clk==1)
+    begin
+      zf=(ans==1'b0);
+      sf=(ans<1'b0);
+      of=(a<1'b0==b<1'b0)&&(ans<1'b0!=a<1'b0);
+    end
   end
 
   reg signed [63:0]anss;
@@ -73,215 +74,218 @@ module execute(
   
   always@(*)
   begin
-    if(icode==4'b0010) //cmovxx
+    if(clk==1)
     begin
-      if(ifun==4'b0000)//rrmovq
+      if(icode==4'b0010) //cmovxx
       begin
-        cnd=1;
-      end
-      else if(ifun==4'b0001)//cmovle
-      begin
-      // (sf^of)||zf
-        xin1=sf;
-        xin2=of;
-        if(xout)
+        if(ifun==4'b0000)//rrmovq
         begin
           cnd=1;
         end
-        else if(zf)
+        else if(ifun==4'b0001)//cmovle
         begin
-          cnd=1;
+        // (sf^of)||zf
+          xin1=sf;
+          xin2=of;
+          if(xout)
+          begin
+            cnd=1;
+          end
+          else if(zf)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0010)//cmovl
-      begin
-      // sf^of
-        xin1=sf;
-        xin2=of;
-        if(xout)
+        else if(ifun==4'b0010)//cmovl
         begin
-          cnd=1;
+        // sf^of
+          xin1=sf;
+          xin2=of;
+          if(xout)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0011)//cmove
-      begin
-      // zf
-        if(zf)
+        else if(ifun==4'b0011)//cmove
         begin
-          cnd=1;
+        // zf
+          if(zf)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0100)//cmovne
-      begin
-      // !zf
-        nin1=zf;
-        if(nout)
+        else if(ifun==4'b0100)//cmovne
         begin
-          cnd=1;
-        end
-      end
-      else if(ifun==4'b0101)//cmovge
-      begin
-      // !(sf^of)
-        xin1=sf;
-        xin2=of;
-        nin1=xout;
-        if(nout)
-        begin
-          cnd=1;
-        end
-      end
-      else if(ifun==4'b0110)//cmovg
-      begin
-      //!(sf^of)) && (!zf)
-        xin1=sf;
-        xin2=of;
-        nin1=xout;
-        if(nout)
-        begin
+        // !zf
           nin1=zf;
           if(nout)
           begin
             cnd=1;
           end
         end
+        else if(ifun==4'b0101)//cmovge
+        begin
+        // !(sf^of)
+          xin1=sf;
+          xin2=of;
+          nin1=xout;
+          if(nout)
+          begin
+            cnd=1;
+          end
+        end
+        else if(ifun==4'b0110)//cmovg
+        begin
+        //!(sf^of)) && (!zf)
+          xin1=sf;
+          xin2=of;
+          nin1=xout;
+          if(nout)
+          begin
+            nin1=zf;
+            if(nout)
+            begin
+              cnd=1;
+            end
+          end
+        end
+        valE=64'd0+valA;
       end
-      valE=64'd0+valA;
-    end
-    else if(icode==4'b0011) //irmovq
-    begin
-      valE=64'd0+valC;
-    end
-    else if(icode==4'b0100) //rmmovq
-    begin
-      valE=valB+valC;
-    end
-    else if(icode==4'b0101) //mrmovq
-    begin
-      valE=valB+valC;
-    end
-    else if(icode==4'b0110) //OPq
-    begin
-      if(ifun==4'b0000) //add
+      else if(icode==4'b0011) //irmovq
       begin
-        //valE=valA+valB;
-        control=2'b00;
-		    a = valA;
-		    b = valB;
+        valE=64'd0+valC;
       end
-      else if(ifun==4'b0001) //sub
+      else if(icode==4'b0100) //rmmovq
       begin
-        //valE=valA-valB;
-        control=2'b01;
-		    a = valA;
-		    b = valB;
+        valE=valB+valC;
       end
-      else if(ifun==4'b0010) //and
+      else if(icode==4'b0101) //mrmovq
       begin
-        //valE=valA.valB;
-        control=2'b10;
-		    a = valA;
-		    b = valB;
+        valE=valB+valC;
       end
-      else if(ifun==4'b0011) //xor
+      else if(icode==4'b0110) //OPq
       begin
-        //valE=valA^valB;
-        control=2'b11;
-		    a = valA;
-		    b = valB;
+        if(ifun==4'b0000) //add
+        begin
+          //valE=valA+valB;
+          control=2'b00;
+          a = valA;
+          b = valB;
+        end
+        else if(ifun==4'b0001) //sub
+        begin
+          //valE=valA-valB;
+          control=2'b01;
+          a = valA;
+          b = valB;
+        end
+        else if(ifun==4'b0010) //and
+        begin
+          //valE=valA.valB;
+          control=2'b10;
+          a = valA;
+          b = valB;
+        end
+        else if(ifun==4'b0011) //xor
+        begin
+          //valE=valA^valB;
+          control=2'b11;
+          a = valA;
+          b = valB;
+        end
+        assign anss=ans;
+        valE=anss;
       end
-      assign anss=ans;
-      valE=anss;
-    end
-    if(icode==4'b0111) //jxx
-    begin
-      if(ifun==4'b0000)//jmp
+      if(icode==4'b0111) //jxx
       begin
-        cnd=1;
-      end
-      else if(ifun==4'b0001)//jle
-      begin
-      // (sf^of)||zf
-        xin1=sf;
-        xin2=of;
-        if(xout)
+        if(ifun==4'b0000)//jmp
         begin
           cnd=1;
         end
-        else if(zf)
+        else if(ifun==4'b0001)//jle
         begin
-          cnd=1;
+        // (sf^of)||zf
+          xin1=sf;
+          xin2=of;
+          if(xout)
+          begin
+            cnd=1;
+          end
+          else if(zf)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0010)//jl
-      begin
-      // sf^of
-        xin1=sf;
-        xin2=of;
-        if(xout)
+        else if(ifun==4'b0010)//jl
         begin
-          cnd=1;
+        // sf^of
+          xin1=sf;
+          xin2=of;
+          if(xout)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0011)//je
-      begin
-      // zf
-        if(zf)
+        else if(ifun==4'b0011)//je
         begin
-          cnd=1;
+        // zf
+          if(zf)
+          begin
+            cnd=1;
+          end
         end
-      end
-      else if(ifun==4'b0100)//jne
-      begin
-      // !zf
-        nin1=zf;
-        if(nout)
+        else if(ifun==4'b0100)//jne
         begin
-          cnd=1;
-        end
-      end
-      else if(ifun==4'b0101)//jge
-      begin
-      // !(sf^of)
-        xin1=sf;
-        xin2=of;
-        nin1=xout;
-        if(nout)
-        begin
-          cnd=1;
-        end
-      end
-      else if(ifun==4'b0110)//jg
-      begin
-      //!(sf^of)) && (!zf)
-        xin1=sf;
-        xin2=of;
-        nin1=xout;
-        if(nout)
-        begin
+        // !zf
           nin1=zf;
           if(nout)
           begin
             cnd=1;
           end
         end
-      end  
-    end
-    if(icode==4'b1000) //call
-    begin
-      valE=-64'd8+valB;
-    end
-    if(icode==4'b1001) //ret
-    begin
-      valE=64'd8+valB;
-    end
-    if(icode==4'b1010) //pushq
-    begin
-      valE=-64'd8+valB;
-    end
-    if(icode==4'b1011) //popq
-    begin
-      valE=64'd8+valB;
+        else if(ifun==4'b0101)//jge
+        begin
+        // !(sf^of)
+          xin1=sf;
+          xin2=of;
+          nin1=xout;
+          if(nout)
+          begin
+            cnd=1;
+          end
+        end
+        else if(ifun==4'b0110)//jg
+        begin
+        //!(sf^of)) && (!zf)
+          xin1=sf;
+          xin2=of;
+          nin1=xout;
+          if(nout)
+          begin
+            nin1=zf;
+            if(nout)
+            begin
+              cnd=1;
+            end
+          end
+        end  
+      end
+      if(icode==4'b1000) //call
+      begin
+        valE=-64'd8+valB;
+      end
+      if(icode==4'b1001) //ret
+      begin
+        valE=64'd8+valB;
+      end
+      if(icode==4'b1010) //pushq
+      begin
+        valE=-64'd8+valB;
+      end
+      if(icode==4'b1011) //popq
+      begin
+        valE=64'd8+valB;
+      end
     end
   end
 
