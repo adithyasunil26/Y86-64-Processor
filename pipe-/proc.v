@@ -1,5 +1,16 @@
 `timescale 1ns / 1ps
 
+`include "d_reg.v"
+`include "e_reg.v"
+`include "f_reg.v"
+`include "m_reg.v"
+`include "w_reg.v"
+`include "fetch.v"
+`include "execute.v"
+`include "register_file.v"
+`include "memory.v"
+`include "pc_update.v"
+
 module proctb;
   reg clk;
   
