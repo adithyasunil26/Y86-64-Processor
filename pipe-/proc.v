@@ -42,7 +42,12 @@ module proctb;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
 
-
+  wire [2:0]  e_stat;
+  wire [3:0]  e_icode;
+  wire [3:0]  e_ifun;
+  wire [63:0] e_valC;
+  wire [63:0] e_valA;
+  wire [63:0] e_valB;
 
   wire [2:0] m_stat;
   wire [3:0] m_icode;
@@ -93,6 +98,22 @@ module proctb;
     .d_rB(d_rB),
     .d_valC(d_valC),
     .d_valP(d_valP)
+  );
+
+  e_reg(
+    clk,
+    .d_stat(d_stat),
+    .d_icode(d_icode),
+    .d_ifun(d_ifun),
+    .d_valC(d_valC),
+    .d_valA(d_valA),
+    .d_valB(d_valB),
+    .e_stat(e_stat),
+    .e_icode(e_icode),
+    .e_ifun(e_ifun),
+    .e_valC(e_valC),
+    .e_valA(e_valA),
+    .e_valB(e_valB)
   );
 
   m_reg(
