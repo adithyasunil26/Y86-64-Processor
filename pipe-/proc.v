@@ -45,13 +45,15 @@ module proctb;
   wire [63:0] f_valC;
   wire [63:0] f_valP;
   
-  wire [2:0] d_stat;
-  wire [3:0] d_icode;
-  wire [3:0] d_ifun;
+  wire [2:0]  d_stat;
+  wire [3:0]  d_icode;
+  wire [3:0]  d_ifun;
   wire [63:0] d_rA;
   wire [63:0] d_rB;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
+  wire [63:0] d_valA;
+  wire [63:0] d_valB;
 
   wire [2:0]  e_stat;
   wire [3:0]  e_icode;
@@ -59,17 +61,18 @@ module proctb;
   wire [63:0] e_valC;
   wire [63:0] e_valA;
   wire [63:0] e_valB;
+  wire [63:0] e_valE;
 
-  wire [2:0] m_stat;
-  wire [3:0] m_icode;
-  wire m_cnd;
+  wire [2:0]  m_stat;
+  wire [3:0]  m_icode;
+  wire        m_cnd;
   wire [63:0] m_valE;
   wire [63:0] m_valA;
 
-  wire [2:0]   w_stat ;
-  wire [3:0]   w_icode;
-  wire [63:0]  w_valE ;
-  wire [63:0]  w_valM ;
+  wire [2:0]  w_stat ;
+  wire [3:0]  w_icode;
+  wire [63:0] w_valE ;
+  wire [63:0] w_valM ;
 
   wire [63:0] reg_mem0;
   wire [63:0] reg_mem1;
@@ -88,15 +91,13 @@ module proctb;
   wire [63:0] reg_mem14;
   wire [63:0] datamem;
 
-
-
-  f_reg(
+  f_reg freg(
     .clk(clk),
     .pred_pc(updated_pc),
     .f_pred_pc(f_pred_pc)
   );  
 
-  d_reg(
+  d_reg dreg(
     .clk(clk),
     .f_stat(f_stat),
     .f_icode(f_icode),
@@ -114,8 +115,8 @@ module proctb;
     .d_valP(d_valP)
   );
 
-  e_reg(
-    clk,
+  e_reg ereg( 
+    .clk(clk),
     .d_stat(d_stat),
     .d_icode(d_icode),
     .d_ifun(d_ifun),
@@ -130,7 +131,7 @@ module proctb;
     .e_valB(e_valB)
   );
 
-  m_reg(
+  m_reg mreg(
     .clk(clk),
     .e_stat(e_stat),
     .e_icode(e_icode),
@@ -144,7 +145,7 @@ module proctb;
     .m_valA(m_valA)
   );
 
-  w_reg(
+  w_reg wreg(
     .clk(clk),
     .m_stat(m_stat),
     .m_icode(m_icode),
