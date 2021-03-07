@@ -3,7 +3,7 @@
 module register_file(
   clk,
   d_icode,d_rA,d_rB,d_cnd,
-  valA,valB,val4,
+  d_valA,d_valB,
 
   w_icode,w_rA,w_rB,w_cnd,
   w_valE,w_valM,
@@ -19,9 +19,8 @@ module register_file(
   input [3:0]       d_icode;
   input [3:0]       d_rA;
   input [3:0]       d_rB;
-  output reg [63:0] valA;
-  output reg [63:0] valB;
-  output reg [63:0] val4;
+  output reg [63:0] d_valA;
+  output reg [63:0] d_valB;
 
   input             w_cnd;
   input [3:0]       w_icode;
@@ -71,41 +70,42 @@ module register_file(
   begin
     if(d_icode==4'b0010) //cmovxx
     begin
-      valA=reg_mem[d_rA];
+      d_valA=reg_mem[d_rA];
     end
     else if(d_icode==4'b0100) //rmmovq
     begin
-      valA=reg_mem[d_rA];
-      valB=reg_mem[d_rB];
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[d_rB];
     end
     else if(d_icode==4'b0101) //mrmovq
     begin
-      valB=reg_mem[d_rB];
+      d_valB=reg_mem[d_rB];
     end
     else if(d_icode==4'b0110) //OPq
     begin
-      valA=reg_mem[d_rA];
-      valB=reg_mem[d_rB];
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[d_rB];
     end
     else if(d_icode==4'b1000) //call
     begin
-      valB=reg_mem[4]; //rsp
+      d_valB=reg_mem[4]; //rsp
     end
     else if(d_icode==4'b1001) //ret
     begin
-      valA=reg_mem[4]; //rsp
-      valB=reg_mem[4]; //rsp
+      d_valA=reg_mem[4]; //rsp
+      d_valB=reg_mem[4]; //rsp
     end
     else if(d_icode==4'b1010) //pushq
     begin
-      valA=reg_mem[d_rA];
-      valB=reg_mem[4]; //rsp
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[4]; //rsp
     end
     else if(d_icode==4'b1011) //popq
     begin
-      valA=reg_mem[4]; //rsp
-      valB=reg_mem[4]; //rsp
+      d_valA=reg_mem[4]; //rsp
+      d_valB=reg_mem[4]; //rsp
     end
+
     reg_mem0=reg_mem[0];
     reg_mem1=reg_mem[1];
     reg_mem2=reg_mem[2];
@@ -162,6 +162,7 @@ module register_file(
       reg_mem[4]=w_valE;
       reg_mem[w_rA]=w_valM;
     end
+
     reg_mem0=reg_mem[0];
     reg_mem1=reg_mem[1];
     reg_mem2=reg_mem[2];
