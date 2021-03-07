@@ -170,7 +170,13 @@ module proc;
     end
   end
   
-
+  always@(*)
+  begin
+    if(stat[2]==1'b1)
+    begin
+      $finish;
+    end
+  end
 
   initial 
     $monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d zf=%d sf=%d of=%d",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
