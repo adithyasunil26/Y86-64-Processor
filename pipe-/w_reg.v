@@ -23,13 +23,3 @@ module w_reg(
     w_valA = m_valM ;
   end
 endmodule
-
-
-
-
-
-
-
-
-
-
