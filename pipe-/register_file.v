@@ -66,7 +66,7 @@ module register_file(
   end
 
   //decode
-  always@(*)
+  always@(posedge clk)
   begin
     if(d_icode==4'b0010) //cmovxx
     begin
