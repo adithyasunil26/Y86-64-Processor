@@ -7,7 +7,7 @@
 `include "w_reg.v"
 `include "fetch.v"
 `include "execute.v"
-`include "register_file.v"
+`include "decode_wb.v"
 `include "memory.v"
 `include "pc_update.v"
 
@@ -192,7 +192,7 @@ module proctb;
     .cnd(cnd)
   );
 
-  register_file reg_file(
+  decode_wb decode_wb(
     .clk(clk),
     .d_icode(d_icode),
     .d_rA(d_rA),

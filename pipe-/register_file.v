@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module register_file(
+module decode_wb(
   clk,
   d_icode,d_rA,d_rB,d_cnd,
   d_valA,d_valB,
