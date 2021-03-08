@@ -71,24 +71,23 @@ module fetch(
     instr_mem[32]=8'b01100000; //5 fn
     instr_mem[33]=8'b00100011; //rA rB
     
-    instr_mem[34]=8'b00010000;
-  //halt
-    instr_mem[35]=8'b00000000; // 0 0
+  //   instr_mem[34]=8'b00010000;
+  // //halt
+  //   instr_mem[35]=8'b00000000; // 0 0
   // //cmovxx
   //   instr_mem[35]=8'b00100101; //2 fn
   //   instr_mem[36]=8'b00000100; //rA rB
 
-
-  // //jxx
-  //   instr_mem[34]=8'b01110000; //7 fn
-  //   instr_mem[35]=8'b00000000; //Dest
-  //   instr_mem[36]=8'b00000000; //Dest
-  //   instr_mem[37]=8'b00000000; //Dest
-  //   instr_mem[38]=8'b00000000; //Dest
-  //   instr_mem[39]=8'b00000000; //Dest
-  //   instr_mem[40]=8'b00000000; //Dest
-  //   instr_mem[41]=8'b00000000; //Dest
-  //   instr_mem[42]=8'b00100000; //Dest
+  //jxx
+    instr_mem[34]=8'b01110000; //7 fn
+    instr_mem[35]=8'b00000000; //Dest
+    instr_mem[36]=8'b00000000; //Dest
+    instr_mem[37]=8'b00000000; //Dest
+    instr_mem[38]=8'b00000000; //Dest
+    instr_mem[39]=8'b00000000; //Dest
+    instr_mem[40]=8'b00000000; //Dest
+    instr_mem[41]=8'b00000000; //Dest
+    instr_mem[42]=8'b00100000; //Dest
 
   // //call
   //   instr_mem[43]=8'b10000000; //8 0
