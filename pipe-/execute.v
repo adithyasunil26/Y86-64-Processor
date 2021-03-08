@@ -72,7 +72,7 @@ module execute(
 		b = 64'b0;
   end
   
-  always@(posedge clk)
+  always@(*)
   begin
     if(clk==1)
     begin
