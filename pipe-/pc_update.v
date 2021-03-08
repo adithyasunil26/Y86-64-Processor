@@ -15,25 +15,25 @@ module pc_update(
 
   always@(*)
   begin
-    // if(icode==4'b0111) //jxx
-    // begin
-    //   if(cnd==1'b1)
-    //   begin
-    //     updated_pc=valC;
-    //   end
-    // end
-    // else if(icode==4'b1000) //call
-    // begin
-    //   updated_pc=valC;
-    // ends
-    // else if(icode==4'b1001) //ret
-    // begin
-    //   updated_pc=valM;
-    // end
-    // else
-    // begin
+    if(icode==4'b0111) //jxx
+    begin
+      if(cnd==1'b1)
+      begin
+        updated_pc=valC;
+      end
+    end
+    else if(icode==4'b1000) //call
+    begin
+      updated_pc=valC;
+    end
+    else if(icode==4'b1001) //ret
+    begin
+      updated_pc=valM;
+    end
+    else
+    begin
       updated_pc=valP;
-    // end
+    end
   end
 
 endmodule
