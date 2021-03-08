@@ -8,7 +8,7 @@ module f_reg(
   input [63:0] pred_pc;
   output reg [63:0] f_pred_pc;
 
-  always@(posedge clk)
+  always@(negedge clk)
   begin
     f_pred_pc=pred_pc;
   end

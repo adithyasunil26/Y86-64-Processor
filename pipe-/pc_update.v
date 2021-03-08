@@ -13,7 +13,7 @@ module pc_update(
   input [63:0] PC;
   output reg [63:0] updated_pc;
 
-  always@(posedge clk)
+  always@(*)
   begin
     // if(icode==4'b0111) //jxx
     // begin

@@ -34,8 +34,8 @@ module proctb;
   wire [2:0]  d_stat;
   wire [3:0]  d_icode;
   wire [3:0]  d_ifun;
-  wire [3:0] d_rA;
-  wire [3:0] d_rB;
+  wire [3:0]  d_rA;
+  wire [3:0]  d_rB;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
   wire [63:0] d_valA;
@@ -89,7 +89,7 @@ module proctb;
 
   f_reg freg(
     .clk(clk),
-    .pred_pc(updated_pc),
+    .pred_pc(f_valP),
     .f_pred_pc(f_pred_pc)
   );  
 
@@ -160,7 +160,7 @@ module proctb;
     .cnd(w_cnd),
     .valC(w_valC),
     .valM(w_valM),
-    .valP(f_valP),
+    .valP(f_pred_pc),
     .updated_pc(updated_pc)
   ); 
 
@@ -251,12 +251,12 @@ module proctb;
     // #5 clk=~clk;
     // #5 clk=~clk;
     // #5 clk=~clk;
-    #60 $finish;
+    #100 $finish;
   end 
 
   always@(*)
   begin
-    PC=f_pred_pc;
+    PC=updated_pc;
   end
 
   always@(*)
