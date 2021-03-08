@@ -39,17 +39,17 @@ module proctb;
 
   wire [2:0]  f_stat;
   wire [3:0]  f_icode;
-  wire [3:0]  f_ifun;
-  wire [63:0] f_rA;
-  wire [63:0] f_rB;
+  wire [3:0]  f_ifun; 
+  wire [3:0]  f_rA;
+  wire [3:0]  f_rB;
   wire [63:0] f_valC;
   wire [63:0] f_valP;
   
   wire [2:0]  d_stat;
   wire [3:0]  d_icode;
   wire [3:0]  d_ifun;
-  wire [63:0] d_rA;
-  wire [63:0] d_rB;
+  wire [3:0] d_rA;
+  wire [3:0] d_rB;
   wire [63:0] d_valC;
   wire [63:0] d_valP;
   wire [63:0] d_valA;
@@ -63,14 +63,17 @@ module proctb;
   wire [63:0] e_valA;
   wire [63:0] e_valB;
   wire [63:0] e_valE;
+  wire [63:0] e_valP;
 
   wire [2:0]  m_stat;
   wire [3:0]  m_icode;
   wire        m_cnd;
   wire [63:0] m_valE;
   wire [63:0] m_valA;
+  wire [63:0] m_valB;
   wire [63:0] m_valM;
-
+  wire [63:0] m_valP;
+  
   wire [2:0]  w_stat ;
   wire [3:0]  w_icode;
   wire        w_cnd;
@@ -78,6 +81,8 @@ module proctb;
   wire [3:0]  w_rB;
   wire [63:0] w_valE ;
   wire [63:0] w_valM ;
+  wire [63:0] w_valP;
+  wire [63:0] w_valC;
 
   wire [63:0] reg_mem0;
   wire [63:0] reg_mem1;
@@ -165,11 +170,11 @@ module proctb;
   pc_update pcup(
     .clk(clk),
     .PC(PC),
-    .icode(f_icode),
-    .cnd(f_cnd),
-    .valC(f_valC),
-    .valM(f_valM),
-    .valP(f_valP),
+    .icode(w_icode),
+    .cnd(w_cnd),
+    .valC(w_valC),
+    .valM(w_valM),
+    .valP(w_valP),
     .updated_pc(updated_pc)
   ); 
 
@@ -265,7 +270,7 @@ module proctb;
 
   always@(*)
   begin
-    PC=updated_pc;
+    PC=f_pred_pc;
   end
 
   always@(*)
@@ -299,7 +304,8 @@ module proctb;
   end
 
   initial 
-    $monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d zf=%d sf=%d of=%d",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
+    //$monitor("clk=%d 0=%d 1=%d 2=%d 3=%d 4=%d zf=%d sf=%d of=%d",clk,reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
+    $monitor("clk=%d f_icode=%b f_ifun=%b f_rA=%b f_rB=%b d_valA=%d d_valB=%d d_valC=%d e_valE=%d m_valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d",clk,f_icode,f_ifun,f_rA,f_rB,d_valA,d_valB,d_valC,e_valE,m_valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
 		// $monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d 5=%d 6=%d 7=%d 8=%d 9=%d 10=%d 11=%d 12=%d 13=%d 14=%d datamem=%d\n",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,reg_mem12,reg_mem13,reg_mem14,datamem);
 		
 endmodule
