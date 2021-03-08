@@ -2,7 +2,7 @@
 
 `include "fetch.v"
 `include "execute.v"
-`include "register_file.v"
+`include "decode_wb.v"
 `include "memory.v"
 `include "pc_update.v"
 
@@ -79,7 +79,7 @@ module proc;
     .cnd(cnd)
   );
 
-  register_file reg_file(
+  decode_wb decode_wb(
     .clk(clk),
     .icode(icode),
     .rA(rA),
@@ -137,15 +137,6 @@ module proc;
     stat[2]=0;
     clk=0;
     PC=64'd32;
-
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
     #50 $finish;
   end 
 
