@@ -17,22 +17,6 @@ module proctb;
   reg [63:0] PC;
 
   reg stat[0:2]; // |AOK|INS|HLT|
-
-  // wire [3:0] icode;
-  // wire [3:0] ifun;
-  // wire [3:0] rA;
-  // wire [3:0] rB; 
-  // wire [63:0] valC;
-  // wire [63:0] valP;
-  // wire instr_valid;
-  // wire imem_error;
-  // wire [63:0] valA;
-  // wire [63:0] valB;
-  // wire [63:0] valE;
-  // wire [63:0] val4;
-  // wire [63:0] valM;
-  // wire cnd;
-  // wire hltins;
   
   wire [63:0] updated_pc;
   wire [63:0] f_pred_pc;
@@ -44,6 +28,8 @@ module proctb;
   wire [3:0]  f_rB;
   wire [63:0] f_valC;
   wire [63:0] f_valP;
+  wire        imem_error;
+  wire        hltins;
   
   wire [2:0]  d_stat;
   wire [3:0]  d_icode;
@@ -174,7 +160,7 @@ module proctb;
     .cnd(w_cnd),
     .valC(w_valC),
     .valM(w_valM),
-    .valP(w_valP),
+    .valP(f_valP),
     .updated_pc(updated_pc)
   ); 
 
@@ -265,7 +251,7 @@ module proctb;
     // #5 clk=~clk;
     // #5 clk=~clk;
     // #5 clk=~clk;
-    #50 $finish;
+    #60 $finish;
   end 
 
   always@(*)
@@ -281,7 +267,7 @@ module proctb;
       stat[1]=1'b0;
       stat[0]=1'b0;
     end
-    else if(instr_valid)
+    else if(instr_valid==1'b0)
     begin
       stat[1]=instr_valid;
       stat[2]=1'b0;
@@ -305,7 +291,7 @@ module proctb;
 
   initial 
     //$monitor("clk=%d 0=%d 1=%d 2=%d 3=%d 4=%d zf=%d sf=%d of=%d",clk,reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
-    $monitor("clk=%d f_icode=%b f_ifun=%b f_rA=%b f_rB=%b d_valA=%d d_valB=%d d_valC=%d e_valE=%d m_valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d",clk,f_icode,f_ifun,f_rA,f_rB,d_valA,d_valB,d_valC,e_valE,m_valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
+    $monitor("clk=%d f_icode=%b f_ifun=%b f_rA=%b f_rB=%b d_valA=%d d_valB=%d d_valC=%d e_valE=%d m_valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d",clk,f_icode,f_ifun,f_rA,f_rB,d_valA,d_valB,d_valC,e_valE,m_valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4);
 		// $monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d 5=%d 6=%d 7=%d 8=%d 9=%d 10=%d 11=%d 12=%d 13=%d 14=%d datamem=%d\n",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,reg_mem12,reg_mem13,reg_mem14,datamem);
 		
 endmodule
