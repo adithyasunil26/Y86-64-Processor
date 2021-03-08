@@ -25,7 +25,7 @@ module fetchtb;
     clk=0;
     PC=64'd0;
 
-    #10 clk=~clk;PC=64'd0;
+    #10 clk=~clk;PC=64'd32;
     #10 clk=~clk;
     #10 clk=~clk;PC=valP;
     #10 clk=~clk;
