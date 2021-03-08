@@ -6,6 +6,7 @@
 
 _gcd:                                   ## @gcd
 	.cfi_startproc
+	
 ## %bb.0:
 	pushq	%rbp
 	.cfi_def_cfa_offset 16
