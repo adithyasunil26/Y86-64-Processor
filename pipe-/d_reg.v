@@ -9,15 +9,15 @@ module d_reg(
   input [2:0] f_stat;
   input [3:0] f_icode;
   input [3:0] f_ifun;
-  input [63:0] f_rA;
-  input [63:0] f_rB;
+  input [3:0] f_rA;
+  input [3:0] f_rB;
   input [63:0] f_valC;
   input [63:0] f_valP;
   output reg [2:0] d_stat;
   output reg [3:0] d_icode;
   output reg [3:0] d_ifun;
-  output reg [63:0] d_rA;
-  output reg [63:0] d_rB;
+  output reg [3:0] d_rA;
+  output reg [3:0] d_rB;
   output reg [63:0] d_valC;
   output reg [63:0] d_valP;
 
