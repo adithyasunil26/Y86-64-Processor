@@ -29,14 +29,14 @@ module fetch(
   //   instr_mem[1]=8'b00010011; //rA rB
 
   // //irmovq
-  //   instr_mem[2]=8'b00110000; //3 0
-  //   instr_mem[3]=8'b00000010; //F rB
-  //   instr_mem[4]=8'b00000000; //V
-  //   instr_mem[5]=8'b00000000; //V
-  //   instr_mem[6]=8'b00000000; //V
-  //   instr_mem[7]=8'b00000000; //V
-  //   instr_mem[8]=8'b00000000; //V
-  //   instr_mem[9]=8'b00000000; //V
+  //   instr_mem[2]= 8'b00110000; //3 0
+  //   instr_mem[3]= 8'b00000010; //F rB
+  //   instr_mem[4]= 8'b00000000; //V
+  //   instr_mem[5]= 8'b00000000; //V
+  //   instr_mem[6]= 8'b00000000; //V
+  //   instr_mem[7]= 8'b00000000; //V
+  //   instr_mem[8]= 8'b00000000; //V
+  //   instr_mem[9]= 8'b00000000; //V
   //   instr_mem[10]=8'b00000000; //V
   //   instr_mem[11]=8'b00010001; //V
 
