@@ -137,7 +137,6 @@ module proc;
     stat[2]=0;
     clk=0;
     PC=64'd32;
-    #50 $finish;
   end 
 
   always@(*)
