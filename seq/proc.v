@@ -1,5 +1,11 @@
 `timescale 1ns / 1ps
 
+`include "fetch.v"
+`include "execute.v"
+`include "register_file.v"
+`include "memory.v"
+`include "pc_update.v"
+
 module proc;
   reg clk;
   
