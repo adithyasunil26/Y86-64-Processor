@@ -27,14 +27,14 @@ module e_reg(
 
   always@(posedge clk)
   begin
-    e_stat    =  d_stat;    
-    e_icode   =  d_icode;     
-    e_ifun    =  d_ifun;    
-    e_rA      =  d_rA;  
-    e_rB      =  d_rB;  
-    e_valC    =  d_valC;    
-    e_valP    =  d_valP;    
-    e_valA    =  d_valA;    
-    e_valB    =  d_valB;    
+    e_stat    <=  d_stat;    
+    e_icode   <=  d_icode;     
+    e_ifun    <=  d_ifun;    
+    e_rA      <=  d_rA;  
+    e_rB      <=  d_rB;  
+    e_valC    <=  d_valC;    
+    e_valP    <=  d_valP;    
+    e_valA    <=  d_valA;    
+    e_valB    <=  d_valB;    
   end
 endmodule

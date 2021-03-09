@@ -10,6 +10,6 @@ module f_reg(
 
   always@(posedge clk)
   begin
-    f_pred_pc=pred_pc;
+    f_pred_pc<=pred_pc;
   end
 endmodule

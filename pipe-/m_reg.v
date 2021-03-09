@@ -31,15 +31,15 @@ module m_reg(
 
   always@(posedge clk)
   begin
-    m_stat   =   e_stat;
-    m_icode  =   e_icode;
-    m_rA     =   e_rA;
-    m_rB     =   e_rB;
-    m_valC   =   e_valC;
-    m_valP   =   e_valP;
-    m_valA   =   e_valA;
-    m_valB   =   e_valB;
-    m_cnd    =   e_cnd;
-    m_valE   =   e_valE;
+    m_stat   <=   e_stat;
+    m_icode  <=   e_icode;
+    m_rA     <=   e_rA;
+    m_rB     <=   e_rB;
+    m_valC   <=   e_valC;
+    m_valP   <=   e_valP;
+    m_valA   <=   e_valA;
+    m_valB   <=   e_valB;
+    m_cnd    <=   e_cnd;
+    m_valE   <=   e_valE;
   end
 endmodule

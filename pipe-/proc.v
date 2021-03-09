@@ -299,8 +299,7 @@ module proc;
     stat[1]=0;
     stat[2]=0;
     clk=0;
-    PC=64'd0;
-    #1PC=64'd32;
+    PC=64'd32;
   end 
 
   always@(*)

@@ -33,16 +33,16 @@ module w_reg(
 
   always@(posedge clk)
   begin
-    w_stat    =   m_stat;
-    w_icode   =   m_icode;
-    w_rA      =   m_rA;
-    w_rB      =   m_rB;
-    w_valC    =   m_valC;
-    w_valP    =   m_valP;
-    w_valA    =   m_valA;
-    w_valB    =   m_valB;
-    w_cnd     =   m_cnd;
-    w_valE    =   m_valE;
-    w_valM    =   m_valM;
+    w_stat    <=   m_stat;
+    w_icode   <=   m_icode;
+    w_rA      <=   m_rA;
+    w_rB      <=   m_rB;
+    w_valC    <=   m_valC;
+    w_valP    <=   m_valP;
+    w_valA    <=   m_valA;
+    w_valB    <=   m_valB;
+    w_cnd     <=   m_cnd;
+    w_valE    <=   m_valE;
+    w_valM    <=   m_valM;
   end
 endmodule

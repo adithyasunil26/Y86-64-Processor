@@ -23,12 +23,12 @@ module d_reg(
 
   always@(posedge clk)
   begin
-    d_stat = f_stat;
-    d_icode= f_icode;
-    d_ifun = f_ifun;
-    d_rA   = f_rA;
-    d_rB   = f_rB;
-    d_valC = f_valC;
-    d_valP = f_valP;
+    d_stat  <= f_stat;
+    d_icode <= f_icode;
+    d_ifun  <= f_ifun;
+    d_rA    <= f_rA;
+    d_rB    <= f_rB;
+    d_valC  <= f_valC;
+    d_valP  <= f_valP;
   end
 endmodule
