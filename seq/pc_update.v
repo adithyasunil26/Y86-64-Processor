@@ -21,6 +21,10 @@ module pc_update(
       begin
         updated_pc=valC;
       end
+      else
+      begin
+        updated_pc=valP;
+      end
     end
     else if(icode==4'b1000) //call
     begin
