@@ -133,7 +133,7 @@ module fetch(
 
   end  
 
-  always@(negedge clk) 
+  always@(posedge clk) 
   begin 
 
     imem_error=0;

@@ -17,14 +17,8 @@ module memory(
 
   reg [63:0] data_mem[0:255];
 
-  always@(negedge clk)
+  always@(posedge clk)
   begin
-    // if(icode==4'b0010) //cmovxx
-    // begin
-    // end
-    // if(icode==4'b0011) //irmovq
-    // begin
-    // end
     if(icode==4'b0100) //rmmovq
     begin
       data_mem[valE]=valA;
@@ -33,24 +27,6 @@ module memory(
     begin
       valM=data_mem[valE];
     end
-    // if(icode==4'b0110) //OPq
-    // begin
-    //   if(ifun==4'b0000) //add
-    //   begin
-    //   end
-    //   if(ifun==4'b0001) //sub
-    //   begin
-    //   end
-    //   if(ifun==4'b0010) //and
-    //   begin
-    //   end
-    //   if(ifun==4'b0011) //xor
-    //   begin
-    //   end
-    // end
-    // if(icode==4'b0111) //jxx
-    // begin
-    // end
     if(icode==4'b1000) //call
     begin
       data_mem[valE]=valP;
