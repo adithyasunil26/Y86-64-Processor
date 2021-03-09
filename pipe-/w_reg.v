@@ -2,8 +2,8 @@
 
 module w_reg(
   clk,
-  m_stat,m_icode,m_valE,m_valM,
-  w_stat,w_icode,w_valE,w_valM
+  m_stat,m_icode,m_rA,m_rB,m_valC,m_valP,m_valA,m_valB,m_cnd,m_valE,m_valM,
+  w_stat,w_icode,w_rA,w_rB,w_valC,w_valP,w_valA,w_valB,w_cnd,w_valE,w_valM
 );  
   input clk;
   
@@ -35,13 +35,13 @@ module w_reg(
   begin
     w_stat    =   m_stat;
     w_icode   =   m_icode;
-    w_rA      =   m_cnd;
-    w_rB      =   m_rA;
-    w_valC    =   m_rB;
-    w_valP    =   m_valC;
-    w_valA    =   m_valP;
-    w_valB    =   m_valA;
-    w_cnd     =   m_valB;
+    w_rA      =   m_rA;
+    w_rB      =   m_rB;
+    w_valC    =   m_valC;
+    w_valP    =   m_valP;
+    w_valA    =   m_valA;
+    w_valB    =   m_valB;
+    w_cnd     =   m_cnd;
     w_valE    =   m_valE;
     w_valM    =   m_valM;
   end

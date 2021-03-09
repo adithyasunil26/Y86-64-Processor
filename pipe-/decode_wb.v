@@ -2,6 +2,7 @@
 
 module decode_wb(
   clk,
+
   d_icode,d_rA,d_rB,d_cnd,
   d_valA,d_valB,
 
@@ -67,68 +68,64 @@ module decode_wb(
 
   //decode
 
-  always@(posedge clk)
+  always@(negedge clk)
   begin
-    // if(clk==1'b1)
-    // begin
-      if(d_icode==4'b0010) //cmovxx
-      begin
-        d_valA=reg_mem[d_rA];
-      end
-      else if(d_icode==4'b0100) //rmmovq
-      begin
-        d_valA=reg_mem[d_rA];
-        d_valB=reg_mem[d_rB];
-      end
-      else if(d_icode==4'b0101) //mrmovq
-      begin
-        d_valB=reg_mem[d_rB];
-      end
-      else if(d_icode==4'b0110) //OPq
-      begin
-        d_valA=reg_mem[d_rA];
-        d_valB=reg_mem[d_rB];
-      end
-      else if(d_icode==4'b1000) //call
-      begin
-        d_valB=reg_mem[4]; //rsp
-      end
-      else if(d_icode==4'b1001) //ret
-      begin
-        d_valA=reg_mem[4]; //rsp
-        d_valB=reg_mem[4]; //rsp
-      end
-      else if(d_icode==4'b1010) //pushq
-      begin
-        d_valA=reg_mem[d_rA];
-        d_valB=reg_mem[4]; //rsp
-      end
-      else if(d_icode==4'b1011) //popq
-      begin
-        d_valA=reg_mem[4]; //rsp
-        d_valB=reg_mem[4]; //rsp
-      end
-
-      reg_mem0=reg_mem[0];
-      reg_mem1=reg_mem[1];
-      reg_mem2=reg_mem[2];
-      reg_mem3=reg_mem[3];
-      reg_mem4=reg_mem[4];
-      reg_mem5=reg_mem[5];
-      reg_mem6=reg_mem[6];
-      reg_mem7=reg_mem[7];
-      reg_mem8=reg_mem[8];
-      reg_mem9=reg_mem[9];
-      reg_mem10=reg_mem[10];
-      reg_mem11=reg_mem[11];
-      reg_mem12=reg_mem[12];
-      reg_mem13=reg_mem[13];
-      reg_mem14=reg_mem[14];
-    // end
+    if(d_icode==4'b0010) //cmovxx
+    begin
+      d_valA=reg_mem[d_rA];
+    end
+    else if(d_icode==4'b0100) //rmmovq
+    begin
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[d_rB];
+    end
+    else if(d_icode==4'b0101) //mrmovq
+    begin
+      d_valB=reg_mem[d_rB];
+    end
+    else if(d_icode==4'b0110) //OPq
+    begin
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[d_rB];
+    end
+    else if(d_icode==4'b1000) //call
+    begin
+      d_valB=reg_mem[4]; //rsp
+    end
+    else if(d_icode==4'b1001) //ret
+    begin
+      d_valA=reg_mem[4]; //rsp
+      d_valB=reg_mem[4]; //rsp
+    end
+    else if(d_icode==4'b1010) //pushq
+    begin
+      d_valA=reg_mem[d_rA];
+      d_valB=reg_mem[4]; //rsp
+    end
+    else if(d_icode==4'b1011) //popq
+    begin
+      d_valA=reg_mem[4]; //rsp
+      d_valB=reg_mem[4]; //rsp
+    end
+    reg_mem0=reg_mem[0];
+    reg_mem1=reg_mem[1];
+    reg_mem2=reg_mem[2];
+    reg_mem3=reg_mem[3];
+    reg_mem4=reg_mem[4];
+    reg_mem5=reg_mem[5];
+    reg_mem6=reg_mem[6];
+    reg_mem7=reg_mem[7];
+    reg_mem8=reg_mem[8];
+    reg_mem9=reg_mem[9];
+    reg_mem10=reg_mem[10];
+    reg_mem11=reg_mem[11];
+    reg_mem12=reg_mem[12];
+    reg_mem13=reg_mem[13];
+    reg_mem14=reg_mem[14];
   end
 
   //write_back
-  always@(posedge clk)
+  always@(negedge clk)
   begin
     if(w_icode==4'b0010) //cmovxx
     begin

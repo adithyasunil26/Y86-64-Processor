@@ -17,7 +17,7 @@ module memory(
 
   reg [63:0] data_mem[0:255];
 
-  always@(*)
+  always@(negedge clk)
   begin
     // if(icode==4'b0010) //cmovxx
     // begin

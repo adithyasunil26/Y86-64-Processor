@@ -179,15 +179,32 @@ module proc;
   );
 
   w_reg wreg(
+
     .clk(clk),
-    .m_stat(m_stat),
-    .m_icode(m_icode),
-    .m_valE(m_valE),
-    .m_valM(m_valM),
-    .w_stat(w_stat),
-    .w_icode(w_icode),
-    .w_valE(w_valE),
-    .w_valM(w_valM)
+
+    .m_stat  (m_stat),
+    .m_icode (m_icode),
+    .m_rA    (m_rA),
+    .m_rB    (m_rB),
+    .m_valC  (m_valC),
+    .m_valP  (m_valP),
+    .m_valA  (m_valA),
+    .m_valB  (m_valB),
+    .m_cnd   (m_cnd),
+    .m_valE  (m_valE),
+    .m_valM  (m_valM),
+
+    .w_stat  (w_stat),
+    .w_icode (w_icode),
+    .w_rA    (w_rA),
+    .w_rB    (w_rB),
+    .w_valC  (w_valC),
+    .w_valP  (w_valP),
+    .w_valA  (w_valA),
+    .w_valB  (w_valB),
+    .w_cnd   (w_cnd),
+    .w_valE  (w_valE),
+    .w_valM  (w_valM)
   );
 
   pc_update pcup(
@@ -282,17 +299,8 @@ module proc;
     stat[1]=0;
     stat[2]=0;
     clk=0;
-    PC=64'd32;
-
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #5 clk=~clk;
-    // #100 $finish;
+    PC=64'd0;
+    #1PC=64'd32;
   end 
 
   always@(*)
@@ -332,7 +340,7 @@ module proc;
 
   initial 
     //$monitor("clk=%d 0=%d 1=%d 2=%d 3=%d 4=%d zf=%d sf=%d of=%d",clk,reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,zf,sf,of);
-    $monitor("clk=%d f_icode=%b f_ifun=%b f_rA=%b f_rB=%b d_valA=%d d_valB=%d d_valC=%d e_valE=%d m_valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d",clk,f_icode,f_ifun,f_rA,f_rB,d_valA,d_valB,d_valC,e_valE,m_valM,instr_valid,imem_error,e_cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4);
+    $monitor("clk=%d w_icode=%b w_ifun=%b w_rA=%b w_rB=%b d_valA=%d d_valB=%d w_valC=%d e_valE=%d m_valM=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d",clk,w_icode,f_ifun,w_rA,w_rB,d_valA,d_valB,f_valC,w_valE,m_valM,e_cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4);
 		// $monitor("clk=%d icode=%b ifun=%b rA=%b rB=%b valA=%d valB=%d valC=%d valE=%d valM=%d insval=%d memerr=%d cnd=%d halt=%d 0=%d 1=%d 2=%d 3=%d 4=%d 5=%d 6=%d 7=%d 8=%d 9=%d 10=%d 11=%d 12=%d 13=%d 14=%d datamem=%d\n",clk,icode,ifun,rA,rB,valA,valB,valC,valE,valM,instr_valid,imem_error,cnd,stat[2],reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,reg_mem12,reg_mem13,reg_mem14,datamem);
-		
+		// $monitor("clk=%d f=%d d=%d e=%d m=%d wb=%d",clk,f_icode,d_icode,e_icode,m_icode,w_icode);
 endmodule
