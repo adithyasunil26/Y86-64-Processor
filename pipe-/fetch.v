@@ -73,21 +73,20 @@ module fetch(
   
     instr_mem[34]=8'b00010000; // 1 0
     instr_mem[35]=8'b00010000; // 1 0
-    instr_mem[36]=8'b00010000; // 1 0
 
-  // //cmovxx
-  //   instr_mem[37]=8'b00100000; //2 fn
-  //   instr_mem[38]=8'b00000100; //rA rB
+  //cmovxx
+    instr_mem[36]=8'b00100000; //2 fn
+    instr_mem[37]=8'b00000100; //rA rB
 
   //   instr_mem[39]=8'b00010000; // 1 0
   //   instr_mem[40]=8'b00010000; // 1 0
   //   instr_mem[41]=8'b00010000; // 1 0
   //   instr_mem[42]=8'b00010000; // 1 0
   //   instr_mem[43]=8'b00010000; // 1 0
-    instr_mem[37]=8'b00010000; // 1 0
     instr_mem[38]=8'b00010000; // 1 0
     instr_mem[39]=8'b00010000; // 1 0
     instr_mem[40]=8'b00010000; // 1 0
+    // instr_mem[37]=8'b00010000; // 1 0
 
   //halt
     instr_mem[41]=8'b00000000; // 0 0
@@ -133,7 +132,7 @@ module fetch(
 
   end  
 
-  always@(posedge clk) 
+  always@(*) 
   begin 
 
     imem_error=0;

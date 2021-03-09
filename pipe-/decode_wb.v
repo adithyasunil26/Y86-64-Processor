@@ -68,7 +68,7 @@ module decode_wb(
 
   //decode
 
-  always@(posedge clk)
+  always@(*)
   begin
     if(d_icode==4'b0010) //cmovxx
     begin
@@ -125,7 +125,7 @@ module decode_wb(
   end
 
   //write_back
-  always@(posedge clk)
+  always@(*)
   begin
     if(w_icode==4'b0010) //cmovxx
     begin

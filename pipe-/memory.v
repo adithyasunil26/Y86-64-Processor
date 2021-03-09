@@ -17,7 +17,7 @@ module memory(
 
   reg [63:0] data_mem[0:255];
 
-  always@(posedge clk)
+  always@(*)
   begin
     if(icode==4'b0100) //rmmovq
     begin
