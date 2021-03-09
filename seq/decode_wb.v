@@ -2,7 +2,7 @@
 
 module decode_wb(
   clk,icode,rA,rB,cnd,
-  valA,valB,val4,
+  valA,valB,
   valE,valM,
   reg_mem0,reg_mem1,reg_mem2,reg_mem3,reg_mem4,reg_mem5,
   reg_mem6,reg_mem7,reg_mem8,reg_mem9,reg_mem10,reg_mem11,
@@ -16,7 +16,6 @@ module decode_wb(
   input [3:0] rB;
   output reg [63:0] valA;
   output reg [63:0] valB;
-  output reg [63:0] val4;
   input [63:0] valE;
   input [63:0] valM;
 

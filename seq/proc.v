@@ -24,7 +24,6 @@ module proc;
   wire [63:0] valA;
   wire [63:0] valB;
   wire [63:0] valE;
-  wire [63:0] val4;
   wire [63:0] valM;
   wire cnd;
   wire hltins;
@@ -87,7 +86,6 @@ module proc;
     .cnd(cnd),
     .valA(valA),
     .valB(valB),
-    .val4(val4),
     .valE(valE),
     .valM(valM),
     .reg_mem0(reg_mem0),
