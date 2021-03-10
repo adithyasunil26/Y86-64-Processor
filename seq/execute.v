@@ -31,6 +31,12 @@ module execute(
     end
   end
 
+  initial begin
+    zf=0;
+    sf=0;
+    of=0;
+  end
+
   reg signed [63:0]anss;
   reg [1:0]control;
   reg signed [63:0]a;
@@ -76,6 +82,7 @@ module execute(
   begin
     if(clk==1)
     begin
+      cnd=0;
       if(icode==4'b0010) //cmovxx
       begin
         if(ifun==4'b0000)//rrmovq
@@ -176,8 +183,8 @@ module execute(
         begin
           //valE=valA-valB;
           control=2'b01;
-          a = valA;
-          b = valB;
+          a = valB;
+          b = valA;
         end
         else if(ifun==4'b0010) //and
         begin

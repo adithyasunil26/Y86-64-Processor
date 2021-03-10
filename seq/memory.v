@@ -15,7 +15,7 @@ module memory(
   output reg [63:0] valM;
   output reg [63:0] datamem;
 
-  reg [63:0] data_mem[0:255];
+  reg [63:0] data_mem[0:1023];
 
   always@(*)
   begin
