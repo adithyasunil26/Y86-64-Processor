@@ -17,6 +17,10 @@ module memory(
 
   reg [63:0] data_mem[0:1023];
 
+  // initial begin
+  //   data_mem[4]=64'b1;
+  // end
+
   always@(*)
   begin
     // if(icode==4'b0010) //cmovxx
