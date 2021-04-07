@@ -44,6 +44,7 @@ popq
 
 Please refer to the [project report](https://github.com/adithyasunil26/Y86-64-Processor/blob/main/Project_Report.pdf) for more details.
 
+## Contents
 The contents of this repository are as follows
 ```bash
 .
@@ -163,4 +164,21 @@ The contents of this repository are as follows
 └── testing
     ├── gcd.s
     └── gcdbin.v
+```
+
+## Run Instructions
+For both the `seq` as well as `pipe` models the instructions must be added to the binary encoded instruction memeory registers in the fetch module.
+
+For `seq`
+```bash
+cd seq
+iverilog -o seq proc.v
+vvp seq
+```
+
+For `pipe`
+```bash
+cd pipe
+iverilog -o pipe proc.v
+vvp pipe
 ```
