@@ -12,7 +12,7 @@ This repository contains both a sequential model as well as a 5 stage pipelined 
 
 
 ## Instructions:
-```assembly
+```
 halt 
 nop
 rrmovq
