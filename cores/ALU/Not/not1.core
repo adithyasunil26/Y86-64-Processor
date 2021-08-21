@@ -1,0 +1,20 @@
+CAPI=2:
+
+name: ::not1:0-r1
+description: 1-bit inverter
+
+filesets:
+  rtl:
+    files:
+      - ALU/Sub/not/not1x1.v
+    file_type: verilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores

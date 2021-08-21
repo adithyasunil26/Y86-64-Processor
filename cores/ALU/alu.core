@@ -1,0 +1,36 @@
+CAPI=2:
+
+name: ::alu:0-r1
+description: ALU
+
+filesets:
+  rtl:
+    files:
+      - ALU/ALU/alu.v
+    file_type: verilogSource
+
+  tb:
+    files:
+      - ALU/ALU/alu_test.v
+    file_type: verilogSource
+    depend:
+      - add32
+      - and32
+      - not32
+      - sub32
+      - xor32
+
+targets:
+  default:
+    filesets: [rtl]
+
+  tb:
+    default_tool: icarus
+    filesets: [rtl, tb]
+    toplevel: Alu_test
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores

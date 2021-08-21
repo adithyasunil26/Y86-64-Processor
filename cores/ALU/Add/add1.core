@@ -1,0 +1,30 @@
+CAPI=2:
+
+name: ::add1:0-r1
+description: 1-bit adder
+
+filesets:
+  rtl:
+    files:
+      - ALU/Add/add1x1.v
+    file_type: verilogSource
+
+  tb:
+    files:
+      - ALU/Add/add1x1_test.v
+    file_type: verilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+  tb:
+    default_tool: icarus
+    filesets: [rtl, tb]
+    toplevel: add_test
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores

@@ -1,0 +1,32 @@
+CAPI=2:
+
+name: ::xor32:0-r1
+description: 32-bit XOR
+
+filesets:
+  rtl:
+    files:
+      - ALU/Xor/xor32x1.v
+    file_type: verilogSource
+    depend:
+      - xor1
+
+  tb:
+    files:
+      - ALU/Xor/xor_test.v
+    file_type: verilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+  tb:
+    default_tool: icarus
+    filesets: [rtl, tb]
+    toplevel: Xor_test
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores

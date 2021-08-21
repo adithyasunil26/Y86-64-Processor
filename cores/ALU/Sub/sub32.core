@@ -1,0 +1,33 @@
+CAPI=2:
+
+name: ::sub32:0-r1
+description: 32-bit subtractor
+
+filesets:
+  rtl:
+    files:
+      - ALU/Sub/sub32.v
+    file_type: verilogSource
+    depend:
+      - not32
+      - add32
+  
+  tb:
+    files:
+      - ALU/Sub/sub_test.v
+    file_type: verilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+  tb:
+    default_tool: icarus
+    filesets: [rtl, tb]
+    toplevel: sub_test
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores
