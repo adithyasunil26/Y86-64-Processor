@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module add32x1(
+module add32(
   input signed [31:0]a,
   input signed [31:0]b,
   output signed [31:0]sum,
@@ -13,7 +13,7 @@ module add32x1(
 
   generate for(i=0; i<32; i=i+1) 
   begin
-    add1x1 g1(a[i],b[i],c[i],sum[i],c[i+1]);
+    add1 g1(a[i],b[i],c[i],sum[i],c[i+1]);
   end
   endgenerate
 

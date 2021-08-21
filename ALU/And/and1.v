@@ -1,10 +1,11 @@
 `timescale 1ns / 1ps
 
-module not1x1(
+module and1(
   input a,
+  input b,
   output ans
   );
 
-  not g1(ans,a);  
-
+  and g1(ans,a,b);
+  
 endmodule

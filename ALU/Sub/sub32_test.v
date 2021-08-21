@@ -6,7 +6,7 @@ module sub_test;
   wire signed [31:0]ans;
   wire overflow;
 
-  sub32x1 uut(
+  sub32 uut(
     .a(a),
     .b(b),
     .ans(ans),

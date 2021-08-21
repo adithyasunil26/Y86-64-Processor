@@ -7,7 +7,7 @@ module add_test;
   wire signed [31:0]sum;
   wire overflow;
 
-  add32x1 uut(
+  add32 uut(
     .a(a),
     .b(b),
     .sum(sum),

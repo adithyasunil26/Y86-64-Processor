@@ -7,7 +7,7 @@ module add_test;
   wire signed sum;
   wire carryout;
 
-  add1x1 uut(
+  add1 uut(
     .a(a),
     .b(b),
     .cin(cin),

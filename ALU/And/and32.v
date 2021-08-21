@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module and32x1(
+module and32(
   input signed [31:0]a,
   input signed [31:0]b,
   output signed [31:0]ans

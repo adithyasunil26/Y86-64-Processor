@@ -6,7 +6,7 @@ module Xor_test;
 
   wire signed [31:0]ans;
 
-  xor32x1 uut(
+  xor32 uut(
     .a(a),
     .b(b),
     .ans(ans)

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module xor1x1(
+module xor1(
   input a,
   input b,
   output ans

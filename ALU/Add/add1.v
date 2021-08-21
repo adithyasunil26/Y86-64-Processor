@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module add1x1(
+module add1(
   input a,
   input b,
   input cin,
