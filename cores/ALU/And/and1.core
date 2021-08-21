@@ -1,0 +1,20 @@
+CAPI=2:
+
+name: ::and1:0-r1
+description: 1-bit AND
+
+filesets:
+  rtl:
+    files:
+      - ALU/And/and1x1.v
+    file_type: verilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+provider :
+  name : github
+  user : adithyasunil26
+  repo : Y86-64-Processor
+  version : fusesoc-cores

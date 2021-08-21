@@ -1,11 +1,10 @@
 `timescale 1ns / 1ps
 
-module xor1(
+module not1(
   input a,
-  input b,
   output ans
   );
 
-  xor g1(ans,a,b);  
+  not g1(ans,a);  
 
 endmodule
